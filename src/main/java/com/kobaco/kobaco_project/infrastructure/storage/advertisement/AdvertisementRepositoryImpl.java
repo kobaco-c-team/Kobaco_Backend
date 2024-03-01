@@ -1,4 +1,4 @@
-package com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.impl;
+package com.kobaco.kobaco_project.infrastructure.storage.advertisement;
 
 import com.kobaco.kobaco_project.domain.advertisement.Advertisement;
 import com.kobaco.kobaco_project.domain.advertisement.AdvertisementRepository;
