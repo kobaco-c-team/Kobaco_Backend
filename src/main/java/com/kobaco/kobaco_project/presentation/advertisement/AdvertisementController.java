@@ -22,4 +22,10 @@ public class AdvertisementController {
         AdvertisementInfoResponse advertisementInfo = advertisementApplication.getAdvertisementInfo(advertisementId);
         return advertisementInfo;
     }
+
+    @GetMapping("/expression/{advertisementId}")
+    public AdvertisementExpressionResponse getAdvertisementExpression(@PathVariable Long advertisementId){
+        AdvertisementExpressionResponse advertisementExpression = this.advertisementApplication.getAdvertisementExpression(advertisementId);
+        return advertisementExpression;
+    }
 }
