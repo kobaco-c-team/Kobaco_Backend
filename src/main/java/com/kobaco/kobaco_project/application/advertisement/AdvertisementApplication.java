@@ -5,6 +5,8 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.Advertis
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.Advertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
+import com.kobaco.kobaco_project.domain.expression.Expression;
+import com.kobaco.kobaco_project.domain.expression.service.ReadAllExpressions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdvertisementApplication {
     private final ReadAdvertisement readAdvertisement;
+    private final ReadAllExpressions readAllExpressions;
+
     @Transactional(readOnly = true)
     public AdvertisementInfoResponse getAdvertisementInfo(Long advertisementId) {
         final Advertisement advertisement = readAdvertisement.readAdvertisement(advertisementId);
@@ -23,7 +27,7 @@ public class AdvertisementApplication {
 
     @Transactional(readOnly = true)
     public AdvertisementExpressionResponse getAdvertisementExpression(Long advertisementId){
-        final List<Expression> expressionList = readAllExpresssions.readAllExpressions(advertisementId);
+        final List<Expression> expressionList = readAllExpressions.readAllExpressions(advertisementId);
         return AdvertisementExpressionResponse.from(expressionList);
     }
 
