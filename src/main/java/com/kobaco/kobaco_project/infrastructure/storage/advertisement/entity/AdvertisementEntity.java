@@ -1,14 +1,14 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 
 import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.kobaco.kobaco_project.infrastructure.storage.expression.entity.ExpressionEntity;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "advertisement")
@@ -24,6 +24,9 @@ public class AdvertisementEntity extends BaseEntity {
     private String agency;
     private String manufacturer;
     private Boolean isArchived = Boolean.FALSE;
+
+    @OneToMany(mappedBy="advertisementEntity")
+    private List<ExpressionEntity> expressionEntities = new ArrayList<>();
 
     private AdvertisementEntity(String title, String videoUrl, String advertiser, String agency, String manufacturer) {
         this.title = title;
