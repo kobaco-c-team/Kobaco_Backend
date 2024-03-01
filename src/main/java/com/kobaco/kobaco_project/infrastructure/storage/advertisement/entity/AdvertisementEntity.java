@@ -1,5 +1,6 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 
+import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "advertisement")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AdvertisementEntity {
+public class AdvertisementEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
