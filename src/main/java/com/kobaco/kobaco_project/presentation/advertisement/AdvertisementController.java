@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.presentation.advertisement;
 
 import com.kobaco.kobaco_project.application.advertisement.AdvertisementApplication;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
