@@ -1,10 +1,13 @@
 package com.kobaco.kobaco_project.domain.advertisement;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Advertisement {
     private Long id;
     private String title;
@@ -14,14 +17,8 @@ public class Advertisement {
     private String manufacturer;
     private Boolean isArchived;
 
-    public Advertisement(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived) {
-        this.id = id;
-        this.title = title;
-        this.videoUrl = videoUrl;
-        this.advertiser = advertiser;
-        this.agency = agency;
-        this.manufacturer = manufacturer;
-        this.isArchived = isArchived;
+    public static Advertisement of(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived) {
+        return new Advertisement(id, title, videoUrl, advertiser, agency, manufacturer, isArchived);
     }
 
 }

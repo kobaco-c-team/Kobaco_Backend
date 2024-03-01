@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class AdvertisementMapper {
 
     public Advertisement toDomain(final AdvertisementEntity advertisementEntity) {
-        return new Advertisement(
+        return Advertisement.of(
             advertisementEntity.getId(),
             advertisementEntity.getTitle(),
             advertisementEntity.getVideoUrl(),
