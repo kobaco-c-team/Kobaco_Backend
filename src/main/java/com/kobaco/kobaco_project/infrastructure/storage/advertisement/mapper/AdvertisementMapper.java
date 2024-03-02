@@ -1,6 +1,6 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.mapper;
 
-import com.kobaco.kobaco_project.domain.advertisement.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
 import org.springframework.stereotype.Component;
 
