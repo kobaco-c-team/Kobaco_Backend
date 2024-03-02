@@ -3,35 +3,35 @@ package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "advertisement")
+@Table(name = "item")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AdvertisementEntity extends BaseEntity {
+public class ItemEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "advertisement_id")
+    @Column(name = "item_id")
     private Long id;
-    private String title;
-    private String videoUrl;
-    private String advertiser;
-    private String agency;
-    private String manufacturer;
-    private Boolean isArchived = Boolean.FALSE;
+    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "advertisement_id")
+    private AdvertisementEntity advertisementEntity;
 
-    private AdvertisementEntity(String title, String videoUrl, String advertiser, String agency, String manufacturer) {
-        this.title = title;
-        this.videoUrl = videoUrl;
-        this.advertiser = advertiser;
-        this.agency = agency;
-        this.manufacturer = manufacturer;
+
+    private ItemEntity(Long id,String name, AdvertisementEntity advertisementEntity) {
+        this.id = id;
+        this.name = name;
+        this.advertisementEntity = advertisementEntity;
     }
 }

@@ -1,6 +1,6 @@
 package com.kobaco.kobaco_project.application.advertisement.dto.response;
 
-import com.kobaco.kobaco_project.domain.advertisement.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
 
 public record AdvertisementInfoResponse(String videoUrl, String advertiser, String agency, String manufacturer, boolean isArchived) {
 

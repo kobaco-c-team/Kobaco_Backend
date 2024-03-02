@@ -1,7 +1,7 @@
-package com.kobaco.kobaco_project.infrastructure.storage.advertisement;
+package com.kobaco.kobaco_project.infrastructure.storage.advertisement.query.impl;
 
-import com.kobaco.kobaco_project.domain.advertisement.Advertisement;
-import com.kobaco.kobaco_project.domain.advertisement.AdvertisementRepository;
+import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.query.AdvertisementRepository;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.mapper.AdvertisementMapper;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.AdvertisementEntityRepository;
@@ -20,4 +20,5 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
             .orElseThrow(() -> new RuntimeException("advertisement not found"));
         return advertisementMapper.toDomain(advertisementEntity);
     }
+
 }

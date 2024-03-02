@@ -1,12 +1,10 @@
-package com.kobaco.kobaco_project.domain.advertisement;
+package com.kobaco.kobaco_project.domain.advertisement.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Advertisement {
     private Long id;
