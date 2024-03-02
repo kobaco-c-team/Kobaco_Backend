@@ -1,4 +1,4 @@
-package com.kobaco.kobaco_project.infrastructure.storage.config;
+package com.kobaco.kobaco_project.infrastructure.config;
 
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
