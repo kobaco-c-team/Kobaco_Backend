@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 
 import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class AdvertisementEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "advertisement_id")
     private Long id;
     private String title;
     private String videoUrl;
@@ -31,9 +33,5 @@ public class AdvertisementEntity extends BaseEntity {
         this.advertiser = advertiser;
         this.agency = agency;
         this.manufacturer = manufacturer;
-    }
-
-    public static AdvertisementEntity of(String title, String videoUrl, String advertiser, String agency, String manufacturer) {
-        return new AdvertisementEntity(title, videoUrl, advertiser, agency, manufacturer);
     }
 }
