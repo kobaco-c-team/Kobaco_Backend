@@ -24,6 +24,7 @@ public class AdvertisementApplication {
     private final ReadPerson readPerson;
     private final ReadAdvertisementSimilar readAdvertisementSimilar;
     private final ArchiveAdvertisement archiveAdvertisement;
+    private final ReadAiAnalysis readAiAnalysis;
 
 
     @Transactional(readOnly = true)
@@ -78,4 +79,7 @@ public class AdvertisementApplication {
         archiveAdvertisement.archiveAdvertisement(advertisementId);
     }
 
+    public AdvertisementAiAnalysisResponse getAiAnalysis(Long advertisementId, String category) {
+        return AdvertisementAiAnalysisResponse.of(category, readAiAnalysis.readAiAnalysis(advertisementId, category));
+    }
 }
