@@ -29,6 +29,7 @@ public class AdvertisementController {
         return advertisementInfo;
     }
 
+    @Operation(summary = "광고 표정 분석 조회")
     @GetMapping("/expression/{advertisementId}")
     public AdvertisementExpressionResponse getAdvertisementExpression(@PathVariable Long advertisementId) {
         AdvertisementExpressionResponse advertisementExpression = this.advertisementApplication.getAdvertisementExpression(advertisementId);
@@ -42,6 +43,7 @@ public class AdvertisementController {
         return advertisementAnalysis;
     }
 
+    @Operation(summary = "비슷한 분위기 광고 조회")
     @GetMapping("/similar/{advertisementId}")
     public AdvertisementSimilarListResponse getAdvertisementSimilar(@PathVariable Long advertisementId) {
         AdvertisementSimilarListResponse advertisementSimilarListResponse = advertisementApplication.getAdvertisementSimilarList(advertisementId);
