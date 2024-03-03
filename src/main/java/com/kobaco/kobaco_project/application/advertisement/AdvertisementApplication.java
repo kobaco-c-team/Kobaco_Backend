@@ -102,11 +102,11 @@ public class AdvertisementApplication {
         if(category.equals("place")){
             return AdvertisementAiAnalysisResponse.of(category,
                     null,null,
-                    readPlace.getPlaee(advertisementId)
+                    readPlace.getPlace(advertisementId)
                             .stream()
                             .map(place -> PlaceInfoResponse.of(place.getName()))
                             .toList(),
-                    readAiAnalysis.readAiAnalysis(advertisementId, category));;
+                    readAiAnalysis.readAiAnalysis(advertisementId, category));
         }
         return null;
     }
