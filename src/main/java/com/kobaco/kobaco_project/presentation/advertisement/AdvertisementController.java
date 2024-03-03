@@ -36,4 +36,10 @@ public class AdvertisementController {
         AdvertisementAnalysisResponse advertisementAnalysis = advertisementApplication.getAdvertisementAnalysis(advertisementId);
         return advertisementAnalysis;
     }
+
+    @GetMapping("/similar/{advertisementId}")
+    public AdvertisementSimilarResponse getAdvertisementSimilar(@PathVariable Long advertisementId){
+        AdvertisementSimilarResponse advertisementSimilarResponse = advertisementApplication.getAdvertisementSimilar(advertisementId);
+        return advertisementSimilarResponse;
+    }
 }
