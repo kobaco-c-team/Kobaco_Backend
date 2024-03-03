@@ -31,9 +31,6 @@ public class AdvertisementEntity extends BaseEntity {
     private String manufacturer;
     private Boolean isArchived = Boolean.FALSE;
 
-    @OneToMany(mappedBy="advertisementEntity")
-    private List<ExpressionEntity> expressionEntities = new ArrayList<>();
-
     @OneToMany(mappedBy = "moodEntity")
     private List<MoodEntity> moodEntities = new ArrayList<>();
 

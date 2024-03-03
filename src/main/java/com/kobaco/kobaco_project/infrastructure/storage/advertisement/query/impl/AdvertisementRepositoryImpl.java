@@ -1,12 +1,15 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.query.impl;
 
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.model.Mood;
 import com.kobaco.kobaco_project.domain.advertisement.query.AdvertisementRepository;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.mapper.AdvertisementMapper;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.AdvertisementEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,6 +22,11 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
         final AdvertisementEntity advertisementEntity = advertisementEntityRepository.findAdvertisementEntityById(id)
             .orElseThrow(() -> new RuntimeException("advertisement not found"));
         return advertisementMapper.toDomain(advertisementEntity);
+    }
+
+    @Override
+    public List<Advertisement> findAllByMoodList(List<Mood> moodList) {
+        
     }
 
 }
