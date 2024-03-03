@@ -4,6 +4,11 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.*;
+import com.kobaco.kobaco_project.domain.advertisement.service.ArchiveAdvertisement;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadMood;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +23,8 @@ public class AdvertisementApplication {
     private final ReadItem readItem;
     private final ReadPerson readPerson;
     private final ReadAdvertisementSimilar readAdvertisementSimilar;
+    private final ArchiveAdvertisement archiveAdvertisement;
+
 
     @Transactional(readOnly = true)
     public AdvertisementInfoResponse getAdvertisementInfo(Long advertisementId) {
@@ -57,13 +64,18 @@ public class AdvertisementApplication {
     }
 
     @Transactional(readOnly = true)
-    public AdvertisementSimilarListResponse getAdvertisementSimilarList(Long advertisementId){
+    public AdvertisementSimilarListResponse getAdvertisementSimilarList(Long advertisementId) {
         return AdvertisementSimilarListResponse.from(
                 this.readAdvertisementSimilar.getAdvertisementSimilarList(advertisementId)
                         .stream()
                         .map(advertisementSimilar -> AdvertisementSimilarResponse.from(advertisementSimilar))
                         .toList()
         );
+    }
+
+    @Transactional
+    public void archiveAdvertisement(Long advertisementId) {
+        archiveAdvertisement.archiveAdvertisement(advertisementId);
     }
 
 }

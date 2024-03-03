@@ -62,7 +62,11 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
                     return advertisementMapper.toDomain(this.advertisementEntityRepository.findAdvertisementEntityById(id).orElseThrow(() -> new RuntimeException("advertisement not found")));
                 })
                 .toList();
+    }
 
+    public void updateArchivedStatus(Advertisement advertisement) {
+        final AdvertisementEntity advertisementEntity = advertisementMapper.toEntity(advertisement);
+        advertisementEntityRepository.updateArchivedStatus(advertisementEntity.getId(), advertisementEntity.getIsArchived(), advertisementEntity.getArchivedAt());
     }
 
 }
