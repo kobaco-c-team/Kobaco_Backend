@@ -1,6 +1,6 @@
 package com.kobaco.kobaco_project.application.advertisement.dto.response;
 
-import com.kobaco.kobaco_project.domain.expression.Expression;
+import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
 import lombok.Builder;
 
 import java.util.ArrayList;

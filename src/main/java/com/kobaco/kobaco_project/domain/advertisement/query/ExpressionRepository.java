@@ -1,4 +1,6 @@
-package com.kobaco.kobaco_project.domain.expression;
+package com.kobaco.kobaco_project.domain.advertisement.query;
+
+import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
 
 import java.util.List;
 

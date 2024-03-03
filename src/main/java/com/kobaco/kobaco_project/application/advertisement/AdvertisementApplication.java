@@ -9,8 +9,8 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.PersonIn
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
-import com.kobaco.kobaco_project.domain.expression.Expression;
-import com.kobaco.kobaco_project.domain.expression.service.ReadAllExpressions;
+import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadAllExpressions;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadMood;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;

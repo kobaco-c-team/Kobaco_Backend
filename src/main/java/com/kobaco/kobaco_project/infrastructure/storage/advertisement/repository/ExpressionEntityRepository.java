@@ -1,7 +1,7 @@
-package com.kobaco.kobaco_project.infrastructure.storage.expression.repository;
+package com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository;
 
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
-import com.kobaco.kobaco_project.infrastructure.storage.expression.entity.ExpressionEntity;
+import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.ExpressionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

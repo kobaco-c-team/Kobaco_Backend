@@ -1,7 +1,6 @@
-package com.kobaco.kobaco_project.infrastructure.storage.expression.entity;
+package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 
-import com.kobaco.kobaco_project.domain.expression.ExpressionType;
-import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
 import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

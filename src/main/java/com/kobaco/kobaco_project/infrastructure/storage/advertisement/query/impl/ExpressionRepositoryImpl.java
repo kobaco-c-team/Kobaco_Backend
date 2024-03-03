@@ -1,12 +1,12 @@
-package com.kobaco.kobaco_project.infrastructure.storage.expression;
+package com.kobaco.kobaco_project.infrastructure.storage.advertisement.query.impl;
 
-import com.kobaco.kobaco_project.domain.expression.Expression;
-import com.kobaco.kobaco_project.domain.expression.ExpressionRepository;
+import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
+import com.kobaco.kobaco_project.domain.advertisement.query.ExpressionRepository;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.AdvertisementEntityRepository;
-import com.kobaco.kobaco_project.infrastructure.storage.expression.entity.ExpressionEntity;
-import com.kobaco.kobaco_project.infrastructure.storage.expression.mapper.ExpressionMapper;
-import com.kobaco.kobaco_project.infrastructure.storage.expression.repository.ExpressionEntityRepository;
+import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.ExpressionEntity;
+import com.kobaco.kobaco_project.infrastructure.storage.advertisement.mapper.ExpressionMapper;
+import com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.ExpressionEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

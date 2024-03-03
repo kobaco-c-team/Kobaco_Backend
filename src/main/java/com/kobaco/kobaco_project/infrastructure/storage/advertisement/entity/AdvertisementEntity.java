@@ -1,7 +1,6 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 
 import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
-import com.kobaco.kobaco_project.infrastructure.storage.expression.entity.ExpressionEntity;
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

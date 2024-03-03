@@ -1,7 +1,7 @@
-package com.kobaco.kobaco_project.infrastructure.storage.expression.mapper;
+package com.kobaco.kobaco_project.infrastructure.storage.advertisement.mapper;
 
-import com.kobaco.kobaco_project.domain.expression.Expression;
-import com.kobaco.kobaco_project.infrastructure.storage.expression.entity.ExpressionEntity;
+import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
+import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.ExpressionEntity;
 import org.springframework.stereotype.Component;
 
 @Component
