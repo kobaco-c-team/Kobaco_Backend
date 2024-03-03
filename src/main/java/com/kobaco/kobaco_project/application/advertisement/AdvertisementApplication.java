@@ -79,7 +79,7 @@ public class AdvertisementApplication {
         archiveAdvertisement.archiveAdvertisement(advertisementId);
     }
 
-    public AdvertisementAiAnalysisResponse getAiAnalysis(Long advertisementId, String category) {
-        return AdvertisementAiAnalysisResponse.of(category, readAiAnalysis.readAiAnalysis(advertisementId, category));
+    public AdvertisementAiAnalysisResponse<Object> getAiAnalysis(Long advertisementId, String category) {
+        return new AdvertisementAiAnalysisResponse<>(category, readAiAnalysis.readAiAnalysis(advertisementId, category));
     }
 }
