@@ -3,7 +3,6 @@ package com.kobaco.kobaco_project.application.advertisement;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
-import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionSection;
 import com.kobaco.kobaco_project.domain.advertisement.service.*;
 import com.kobaco.kobaco_project.domain.advertisement.service.ArchiveAdvertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
@@ -12,8 +11,6 @@ import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 
 @ApplicationService
@@ -25,6 +22,7 @@ public class AdvertisementApplication {
     private final ReadMood readMood;
     private final ReadItem readItem;
     private final ReadPerson readPerson;
+    private final ReadAdvertisementSimilar readAdvertisementSimilar;
     private final ArchiveAdvertisement archiveAdvertisement;
 
 
@@ -37,7 +35,7 @@ public class AdvertisementApplication {
     @Transactional(readOnly = true)
     public AdvertisementExpressionResponse getAdvertisementExpression(Long advertisementId) {
         return AdvertisementExpressionResponse.of(
-                this.readAllExpressions.readExpressionSection(advertisementId)
+                this.readAllExpressions.getExpressionSection(advertisementId)
                         .stream()
                         .map(ExpressionSectionResponse::of)
                         .toList()
@@ -61,6 +59,16 @@ public class AdvertisementApplication {
                 readPerson.getPerson(advertisementId)
                         .stream()
                         .map(person -> PersonInfoResponse.of(person.getName()))
+                        .toList()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public AdvertisementSimilarListResponse getAdvertisementSimilarList(Long advertisementId) {
+        return AdvertisementSimilarListResponse.from(
+                this.readAdvertisementSimilar.getAdvertisementSimilarList(advertisementId)
+                        .stream()
+                        .map(advertisementSimilar -> AdvertisementSimilarResponse.from(advertisementSimilar))
                         .toList()
         );
     }

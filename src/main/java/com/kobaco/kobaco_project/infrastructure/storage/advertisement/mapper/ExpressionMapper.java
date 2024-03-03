@@ -11,7 +11,7 @@ public class ExpressionMapper {
                 expressionEntity.getId(),
                 expressionEntity.getExpressionType().getDescription(),
                 expressionEntity.getTime(),
-                expressionEntity.getAdvertisementEntity().getId()
+                expressionEntity.getAdvertisementId()
         );
     }
 }

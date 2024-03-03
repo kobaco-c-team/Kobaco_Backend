@@ -21,8 +21,7 @@ public class ExpressionRepositoryImpl implements ExpressionRepository {
     private final ExpressionMapper expressionMapper;
     @Override
     public List<Expression> findAllByAdvertisementId(Long advertisement_id) {
-        AdvertisementEntity advertisementEntity = this.advertisementEntityRepository.findAdvertisementEntityById(advertisement_id).orElseThrow(() -> new RuntimeException("advertisement not found"));;
-        List<ExpressionEntity> expressionEntityList = this.expressionEntityRepository.findAllByAdvertisementEntity(advertisementEntity).orElseThrow(() -> new RuntimeException("expression not found"));
+        List<ExpressionEntity> expressionEntityList = this.expressionEntityRepository.findAllByAdvertisementId(advertisement_id).orElseThrow(() -> new RuntimeException("expression not found"));
 
         List<Expression> expressionList = new ArrayList<>();
         for(ExpressionEntity expressionEntity : expressionEntityList){

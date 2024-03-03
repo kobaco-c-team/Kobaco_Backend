@@ -4,6 +4,7 @@ import com.kobaco.kobaco_project.application.advertisement.AdvertisementApplicat
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAnalysisResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementSimilarListResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +42,15 @@ public class AdvertisementController {
         return advertisementAnalysis;
     }
 
+    @GetMapping("/similar/{advertisementId}")
+    public AdvertisementSimilarListResponse getAdvertisementSimilar(@PathVariable Long advertisementId) {
+        AdvertisementSimilarListResponse advertisementSimilarListResponse = advertisementApplication.getAdvertisementSimilarList(advertisementId);
+        return advertisementSimilarListResponse;
+    }
+
     @Operation(summary = "광고 스크랩")
     @PatchMapping("/archive/{advertisementId}")
     public void archiveAdvertisement(@PathVariable Long advertisementId) {
         advertisementApplication.archiveAdvertisement(advertisementId);
     }
-
 }

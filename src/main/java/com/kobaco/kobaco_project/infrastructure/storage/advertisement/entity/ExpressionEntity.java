@@ -17,18 +17,15 @@ public class ExpressionEntity  extends BaseEntity {
     private Long id;
     private ExpressionType expressionType;
     private Double time;
+    private Long advertisementId;
 
-    @ManyToOne
-    @JoinColumn(name="advertisement_id", nullable = false)
-    private AdvertisementEntity advertisementEntity;
-
-    private ExpressionEntity(ExpressionType expressionType, Double time, AdvertisementEntity advertisementEntity){
+    private ExpressionEntity(ExpressionType expressionType, Double time, Long advertisementId){
         this.expressionType =expressionType;
         this.time=time;
-        this.advertisementEntity =advertisementEntity;
+        this.advertisementId =advertisementId;
     }
 
-    public static ExpressionEntity of(ExpressionType expressionType, Double time, AdvertisementEntity advertisementEntity){
-        return new ExpressionEntity(expressionType,time,advertisementEntity);
+    public static ExpressionEntity of(ExpressionType expressionType, Double time, Long advertisementId){
+        return new ExpressionEntity(expressionType,time,advertisementId);
     }
 }

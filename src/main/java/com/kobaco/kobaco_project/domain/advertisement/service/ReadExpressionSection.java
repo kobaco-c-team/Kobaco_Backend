@@ -1,6 +1,5 @@
 package com.kobaco.kobaco_project.domain.advertisement.service;
 
-import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.common.annotation.DomainService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
 import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionSection;
@@ -19,7 +18,7 @@ public class ReadExpressionSection {
 
     private final ExpressionRepository expressionRepository;
 
-    public List<ExpressionSection> readExpressionSection(Long advertisementId){
+    public List<ExpressionSection> getExpressionSection(Long advertisementId){
         List<Expression> expressionList = this.expressionRepository.findAllByAdvertisementId(advertisementId);
 
         expressionList.sort((a,b) -> Double.compare(a.getTime(), b.getTime()));
