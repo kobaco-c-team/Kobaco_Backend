@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.presentation.advertisement;
 
 import com.kobaco.kobaco_project.application.advertisement.AdvertisementApplication;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAnalysisResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +26,12 @@ public class AdvertisementController {
     public AdvertisementInfoResponse getAdvertisementInfo(@PathVariable Long advertisementId) {
         AdvertisementInfoResponse advertisementInfo = advertisementApplication.getAdvertisementInfo(advertisementId);
         return advertisementInfo;
+    }
+
+    @GetMapping("/expression/{advertisementId}")
+    public AdvertisementExpressionResponse getAdvertisementExpression(@PathVariable Long advertisementId) {
+        AdvertisementExpressionResponse advertisementExpression = this.advertisementApplication.getAdvertisementExpression(advertisementId);
+        return advertisementExpression;
     }
 
     @Operation(summary = "광고 영상 분석 결과 조회(영상 분위기, 인물, 사물)")

@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity;
 
 import com.kobaco.kobaco_project.infrastructure.storage.common.BaseEntity;
+import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +12,9 @@ import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "advertisement")
@@ -27,6 +31,10 @@ public class AdvertisementEntity extends BaseEntity {
     private String agency;
     private String manufacturer;
     private Boolean isArchived = Boolean.FALSE;
+
+    @OneToMany(mappedBy="advertisementEntity")
+    private List<ExpressionEntity> expressionEntities = new ArrayList<>();
+
     private LocalDateTime archivedAt;
     private AdvertisementEntity(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived, LocalDateTime archivedAt) {
         this.id = id;
