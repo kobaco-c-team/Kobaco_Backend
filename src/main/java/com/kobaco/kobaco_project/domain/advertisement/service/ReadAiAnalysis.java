@@ -15,7 +15,7 @@ public class ReadAiAnalysis {
     public List<String> readAiAnalysis(Long advertisementId, String category) {
         return imageRepository.findAllByType(category)
                 .stream()
-                .map(Image::getType)
+                .map(Image::getImageUrl)
                 .toList();
     }
 }

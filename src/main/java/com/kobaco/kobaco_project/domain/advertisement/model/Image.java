@@ -10,4 +10,7 @@ public class Image {
     private Long id;
     private String type;
     private String imageUrl;
+    public static Image of(Long id, String type, String imageUrl){
+        return new Image(id, type, imageUrl);
+    }
 }
