@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,12 +27,19 @@ public class AdvertisementEntity extends BaseEntity {
     private String agency;
     private String manufacturer;
     private Boolean isArchived = Boolean.FALSE;
-
-    private AdvertisementEntity(String title, String videoUrl, String advertiser, String agency, String manufacturer) {
+    private LocalDateTime archivedAt;
+    private AdvertisementEntity(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived, LocalDateTime archivedAt) {
+        this.id = id;
         this.title = title;
         this.videoUrl = videoUrl;
         this.advertiser = advertiser;
         this.agency = agency;
         this.manufacturer = manufacturer;
+        this.isArchived = isArchived;
+        this.archivedAt = archivedAt;
+    }
+
+    public static AdvertisementEntity of(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived, LocalDateTime archivedAt) {
+        return new AdvertisementEntity(id, title, videoUrl, advertiser, agency, manufacturer, isArchived, archivedAt);
     }
 }
