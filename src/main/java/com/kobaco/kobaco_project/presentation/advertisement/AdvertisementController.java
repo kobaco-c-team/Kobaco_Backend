@@ -55,4 +55,11 @@ public class AdvertisementController {
     public void archiveAdvertisement(@PathVariable Long advertisementId) {
         advertisementApplication.archiveAdvertisement(advertisementId);
     }
+
+    @Operation(summary = "영상 분석 결과 조회(이미지만 조회)")
+    @GetMapping("/ai-analysis/{advertisementId}")
+    public AdvertisementAiAnalysisResponse getAiAnalysis(@PathVariable Long advertisementId){
+        AdvertisementAiAnalysisResponse advertisementAiAnalysisResponse = advertisementApplication.getAiAnalysis(advertisementId);
+        return advertisementAiAnalysisResponse;
+    }
 }
