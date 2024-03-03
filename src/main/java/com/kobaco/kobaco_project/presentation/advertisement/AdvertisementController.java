@@ -32,4 +32,11 @@ public class AdvertisementController {
         AdvertisementAnalysisResponse advertisementAnalysis = advertisementApplication.getAdvertisementAnalysis(advertisementId);
         return advertisementAnalysis;
     }
+
+    @Operation(summary = "광고 스크랩")
+    @PatchMapping("/archive/{advertisementId}")
+    public void archiveAdvertisement(@PathVariable Long advertisementId) {
+        advertisementApplication.archiveAdvertisement(advertisementId);
+    }
+
 }
