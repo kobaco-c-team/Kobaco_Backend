@@ -1,5 +1,6 @@
 package com.kobaco.kobaco_project.domain.advertisement.model;
 
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,9 +15,20 @@ public class Advertisement {
     private String agency;
     private String manufacturer;
     private Boolean isArchived;
+    private LocalDateTime archivedAt;
 
-    public static Advertisement of(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived) {
-        return new Advertisement(id, title, videoUrl, advertiser, agency, manufacturer, isArchived);
+    public static Advertisement of(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived, LocalDateTime archivedAt) {
+        return new Advertisement(id, title, videoUrl, advertiser, agency, manufacturer, isArchived, archivedAt);
+    }
+
+    public void archive() {
+        if(this.isArchived) {
+            this.isArchived = false;
+        }
+        else {
+            this.isArchived = true;
+            archivedAt = LocalDateTime.now();
+        }
     }
 
 }

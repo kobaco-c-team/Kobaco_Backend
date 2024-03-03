@@ -7,6 +7,7 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.ItemInfo
 import com.kobaco.kobaco_project.application.advertisement.dto.response.PersonInfoResponse;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.service.ArchiveAdvertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadMood;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
@@ -21,6 +22,8 @@ public class AdvertisementApplication {
     private final ReadMood readMood;
     private final ReadItem readItem;
     private final ReadPerson readPerson;
+    private final ArchiveAdvertisement archiveAdvertisement;
+
     @Transactional(readOnly = true)
     public AdvertisementInfoResponse getAdvertisementInfo(Long advertisementId) {
         final Advertisement advertisement = readAdvertisement.getAdvertisement(advertisementId);
@@ -43,6 +46,11 @@ public class AdvertisementApplication {
                         .map(person -> PersonInfoResponse.of(person.getName()))
                         .toList()
         );
+    }
+
+    @Transactional
+    public void archiveAdvertisement(Long advertisementId) {
+        archiveAdvertisement.archiveAdvertisement(advertisementId);
     }
 
 }

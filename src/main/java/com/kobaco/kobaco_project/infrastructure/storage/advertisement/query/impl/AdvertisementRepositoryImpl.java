@@ -21,4 +21,10 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
         return advertisementMapper.toDomain(advertisementEntity);
     }
 
+    @Override
+    public void updateArchivedStatus(Advertisement advertisement) {
+        final AdvertisementEntity advertisementEntity = advertisementMapper.toEntity(advertisement);
+        advertisementEntityRepository.updateArchivedStatus(advertisementEntity.getId(), advertisementEntity.getIsArchived(), advertisementEntity.getArchivedAt());
+    }
+
 }
