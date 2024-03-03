@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MoodEntityRepository extends JpaRepository<MoodEntity, Long> {
     List<MoodEntity> findAllByAdvertisementEntityId(Long advertisementId);
+    List<MoodEntity> findAllByType(String type);
 }

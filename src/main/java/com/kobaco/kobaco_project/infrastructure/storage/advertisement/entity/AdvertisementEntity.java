@@ -31,7 +31,8 @@ public class AdvertisementEntity extends BaseEntity {
     private String manufacturer;
     private Boolean isArchived = Boolean.FALSE;
 
-    @OneToMany(mappedBy = "moodEntity")
+
+    @OneToMany(mappedBy = "advertisementEntity")
     private List<MoodEntity> moodEntities = new ArrayList<>();
 
     private AdvertisementEntity(String title, String videoUrl, String advertiser, String agency, String manufacturer) {

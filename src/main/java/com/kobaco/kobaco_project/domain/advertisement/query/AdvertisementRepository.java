@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AdvertisementRepository {
     Advertisement findById(Long id);
-    List<Advertisement> findAllByMoodList(List<Mood> moodList);
+    List<Advertisement> findAllByMoodList(List<Mood> moodList, Long advertisementId);
 }

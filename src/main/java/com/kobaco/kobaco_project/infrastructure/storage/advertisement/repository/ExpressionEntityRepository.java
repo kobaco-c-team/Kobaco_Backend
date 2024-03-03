@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ExpressionEntityRepository extends JpaRepository<ExpressionEntity, Long> {
-    Optional<List<ExpressionEntity>> findAllByAdvertisementEntity(AdvertisementEntity advertisementEntity);
+    Optional<List<ExpressionEntity>> findAllByAdvertisementId(Long AdvertisementId);
 }
