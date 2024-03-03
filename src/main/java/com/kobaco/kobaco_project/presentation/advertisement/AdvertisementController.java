@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.presentation.advertisement;
 
 import com.kobaco.kobaco_project.application.advertisement.AdvertisementApplication;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAiAnalysisResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAnalysisResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
@@ -54,5 +55,11 @@ public class AdvertisementController {
     @PatchMapping("/archive/{advertisementId}")
     public void archiveAdvertisement(@PathVariable Long advertisementId) {
         advertisementApplication.archiveAdvertisement(advertisementId);
+    }
+
+    @Operation(summary = "영상 분석 결과 조회(이미지만 조회), category는 {person, object, place} 만 가능")
+    @GetMapping("/ai-analysis/{advertisementId}/{category}")
+    public AdvertisementAiAnalysisResponse getAiAnalysis(@PathVariable Long advertisementId, @PathVariable String category){
+        return advertisementApplication.getAiAnalysis(advertisementId, category);
     }
 }

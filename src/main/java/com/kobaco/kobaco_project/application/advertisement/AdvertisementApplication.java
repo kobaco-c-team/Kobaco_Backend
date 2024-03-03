@@ -12,7 +12,6 @@ import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @ApplicationService
 @RequiredArgsConstructor
 public class AdvertisementApplication {
@@ -22,8 +21,10 @@ public class AdvertisementApplication {
     private final ReadMood readMood;
     private final ReadItem readItem;
     private final ReadPerson readPerson;
+    private final ReadPlace readPlace;
     private final ReadAdvertisementSimilar readAdvertisementSimilar;
     private final ArchiveAdvertisement archiveAdvertisement;
+    private final ReadAiAnalysis readAiAnalysis;
 
 
     @Transactional(readOnly = true)
@@ -78,4 +79,35 @@ public class AdvertisementApplication {
         archiveAdvertisement.archiveAdvertisement(advertisementId);
     }
 
+    public AdvertisementAiAnalysisResponse getAiAnalysis(Long advertisementId, String category) {
+        if (category.equals("person")) {
+            return AdvertisementAiAnalysisResponse.of(category,
+                    readPerson.getPerson(advertisementId)
+                            .stream()
+                            .map(person -> PersonInfoResponse.of(person.getName()))
+                            .toList(),
+                    null,null,
+                    readAiAnalysis.readAiAnalysis(advertisementId, category));
+        }
+        if(category.equals("object")){
+            return AdvertisementAiAnalysisResponse.of(category,
+                    null,
+                    readItem.getItem(advertisementId)
+                            .stream()
+                            .map(item -> ItemInfoResponse.of(item.getName()))
+                            .toList(),
+                    null,
+                    readAiAnalysis.readAiAnalysis(advertisementId, category));
+        }
+        if(category.equals("place")){
+            return AdvertisementAiAnalysisResponse.of(category,
+                    null,null,
+                    readPlace.getPlace(advertisementId)
+                            .stream()
+                            .map(place -> PlaceInfoResponse.of(place.getName()))
+                            .toList(),
+                    readAiAnalysis.readAiAnalysis(advertisementId, category));
+        }
+        return null;
+    }
 }
