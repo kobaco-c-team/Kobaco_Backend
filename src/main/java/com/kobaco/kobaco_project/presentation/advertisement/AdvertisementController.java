@@ -4,6 +4,7 @@ import com.kobaco.kobaco_project.application.advertisement.AdvertisementApplicat
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAnalysisResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementSimilarListResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +39,8 @@ public class AdvertisementController {
     }
 
     @GetMapping("/similar/{advertisementId}")
-    public AdvertisementSimilarResponse getAdvertisementSimilar(@PathVariable Long advertisementId){
-        AdvertisementSimilarResponse advertisementSimilarResponse = advertisementApplication.getAdvertisementSimilar(advertisementId);
-        return advertisementSimilarResponse;
+    public AdvertisementSimilarListResponse getAdvertisementSimilar(@PathVariable Long advertisementId){
+        AdvertisementSimilarListResponse advertisementSimilarListResponse = advertisementApplication.getAdvertisementSimilar(advertisementId);
+        return advertisementSimilarListResponse;
     }
 }
