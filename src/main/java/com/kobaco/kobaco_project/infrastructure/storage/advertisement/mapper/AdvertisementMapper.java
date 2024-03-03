@@ -15,7 +15,21 @@ public class AdvertisementMapper {
             advertisementEntity.getAdvertiser(),
             advertisementEntity.getAgency(),
             advertisementEntity.getManufacturer(),
-            advertisementEntity.getIsArchived()
+            advertisementEntity.getIsArchived(),
+            advertisementEntity.getArchivedAt()
+        );
+    }
+
+    public AdvertisementEntity toEntity(final Advertisement advertisement) {
+        return AdvertisementEntity.of(
+            advertisement.getId(),
+            advertisement.getTitle(),
+            advertisement.getVideoUrl(),
+            advertisement.getAdvertiser(),
+            advertisement.getAgency(),
+            advertisement.getManufacturer(),
+            advertisement.getIsArchived(),
+            advertisement.getArchivedAt()
         );
     }
 }

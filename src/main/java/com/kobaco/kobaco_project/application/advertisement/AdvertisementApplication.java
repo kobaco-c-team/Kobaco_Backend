@@ -5,6 +5,11 @@ import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
 import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionSection;
 import com.kobaco.kobaco_project.domain.advertisement.service.*;
+import com.kobaco.kobaco_project.domain.advertisement.service.ArchiveAdvertisement;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadMood;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
+import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +25,8 @@ public class AdvertisementApplication {
     private final ReadMood readMood;
     private final ReadItem readItem;
     private final ReadPerson readPerson;
+    private final ArchiveAdvertisement archiveAdvertisement;
+
 
     @Transactional(readOnly = true)
     public AdvertisementInfoResponse getAdvertisementInfo(Long advertisementId) {
@@ -56,6 +63,11 @@ public class AdvertisementApplication {
                         .map(person -> PersonInfoResponse.of(person.getName()))
                         .toList()
         );
+    }
+
+    @Transactional
+    public void archiveAdvertisement(Long advertisementId) {
+        archiveAdvertisement.archiveAdvertisement(advertisementId);
     }
 
 }
