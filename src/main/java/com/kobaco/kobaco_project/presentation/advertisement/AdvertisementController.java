@@ -40,7 +40,7 @@ public class AdvertisementController {
 
     @GetMapping("/similar/{advertisementId}")
     public AdvertisementSimilarListResponse getAdvertisementSimilar(@PathVariable Long advertisementId){
-        AdvertisementSimilarListResponse advertisementSimilarListResponse = advertisementApplication.getAdvertisementSimilar(advertisementId);
+        AdvertisementSimilarListResponse advertisementSimilarListResponse = advertisementApplication.getAdvertisementSimilarList(advertisementId);
         return advertisementSimilarListResponse;
     }
 }

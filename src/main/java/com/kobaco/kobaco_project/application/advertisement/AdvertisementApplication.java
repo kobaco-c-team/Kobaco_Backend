@@ -59,7 +59,7 @@ public class AdvertisementApplication {
     @Transactional(readOnly = true)
     public AdvertisementSimilarListResponse getAdvertisementSimilarList(Long advertisementId){
         return AdvertisementSimilarListResponse.from(
-                this.readAdvertisementSimilar.getAdvertisementSimilar(advertisementId)
+                this.readAdvertisementSimilar.getAdvertisementSimilarList(advertisementId)
                         .stream()
                         .map(advertisementSimilar -> AdvertisementSimilarResponse.from(advertisementSimilar))
                         .toList()

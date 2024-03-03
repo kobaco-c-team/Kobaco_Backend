@@ -34,6 +34,9 @@ public class AdvertisementEntity extends BaseEntity {
     @OneToMany(mappedBy="advertisementEntity")
     private List<ExpressionEntity> expressionEntities = new ArrayList<>();
 
+    @OneToMany(mappedBy = "moodEntity")
+    private List<MoodEntity> moodEntities = new ArrayList<>();
+
     private AdvertisementEntity(String title, String videoUrl, String advertiser, String agency, String manufacturer) {
         this.title = title;
         this.videoUrl = videoUrl;

@@ -1,5 +1,6 @@
 package com.kobaco.kobaco_project.application.advertisement.dto.response;
 
+import com.kobaco.kobaco_project.domain.advertisement.model.AdvertisementSimilar;
 import lombok.Builder;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public record AdvertisementSimilarResponse(String videoUrl, String title, String
                         .map(mood -> new MoodInfoResponse(mood.getType()))
                         .toList()
                 )
-                .isArchived(advertisementSimilar.getIsArchived())
+                .isArchived(advertisementSimilar.isArchived())
                 .build();
     }
 }
