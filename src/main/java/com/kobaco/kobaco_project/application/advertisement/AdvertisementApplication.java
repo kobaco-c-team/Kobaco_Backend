@@ -1,19 +1,10 @@
 package com.kobaco.kobaco_project.application.advertisement;
 
-import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
-import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAnalysisResponse;
-import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
-import com.kobaco.kobaco_project.application.advertisement.dto.response.MoodInfoResponse;
-import com.kobaco.kobaco_project.application.advertisement.dto.response.ItemInfoResponse;
-import com.kobaco.kobaco_project.application.advertisement.dto.response.PersonInfoResponse;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
-import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
-import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
-import com.kobaco.kobaco_project.domain.advertisement.service.ReadAllExpressions;
-import com.kobaco.kobaco_project.domain.advertisement.service.ReadMood;
-import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
-import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionSection;
+import com.kobaco.kobaco_project.domain.advertisement.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdvertisementApplication {
     private final ReadAdvertisement readAdvertisement;
-    private final ReadAllExpressions readAllExpressions;
+    private final ReadExpressionSection readAllExpressions;
+    private final ReadOrderOfExpression readOrderOfExpression;
     private final ReadMood readMood;
     private final ReadItem readItem;
     private final ReadPerson readPerson;
@@ -37,8 +29,15 @@ public class AdvertisementApplication {
 
     @Transactional(readOnly = true)
     public AdvertisementExpressionResponse getAdvertisementExpression(Long advertisementId) {
-        final List<Expression> expressionList = readAllExpressions.readAllExpressions(advertisementId);
-        return AdvertisementExpressionResponse.from(expressionList);
+        return AdvertisementExpressionResponse.of(
+                this.readAllExpressions.readExpressionSection(advertisementId)
+                        .stream()
+                        .map(ExpressionSectionResponse::of)
+                        .toList()
+                ,
+                this.readOrderOfExpression.readFirstExpression(advertisementId),
+                this.readOrderOfExpression.readSecondExpression(advertisementId)
+        );
     }
 
     @Transactional(readOnly = true)
