@@ -5,14 +5,17 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.Advertis
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementExpressionResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementAnalysisResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementListResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementSimilarListResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -61,5 +64,19 @@ public class AdvertisementController {
     @GetMapping("/ai-analysis/{advertisementId}/{category}")
     public AdvertisementAiAnalysisResponse getAiAnalysis(@PathVariable Long advertisementId, @PathVariable String category){
         return advertisementApplication.getAiAnalysis(advertisementId, category);
+    }
+
+    @Operation(summary = "광고 리스트 조회 & 검색 sortType 최신순은 LATEST, 관련도순은 RELATION, kwdVal은 검색어, startDate는 시작일, endDate는 종료일, "
+            + "kwdVal이 없으면 빈 문자열을 넣어주세요, startDate와 endDate는 yyyy-MM-dd 형식으로 넣어주세요."
+            + "기본 정렬이 최신순이라 default는 LATEST로 설정해주세요.")
+    @GetMapping("/list")
+    public AdvertisementListResponse getAdvertisementList(
+            @RequestParam(value = "sortType") String sortType,
+            @RequestParam(value = "kwdVal", required = false) String kwdVal,
+            @RequestParam(value = "startDate") LocalDate startDate,
+            @RequestParam(value = "endDate") LocalDate endDate
+    ) {
+        AdvertisementListResponse advertisementListResponse = advertisementApplication.getAdvertisementList(sortType, kwdVal, startDate, endDate);
+        return advertisementListResponse;
     }
 }
