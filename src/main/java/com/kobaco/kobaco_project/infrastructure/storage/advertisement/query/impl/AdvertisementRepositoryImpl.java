@@ -7,6 +7,8 @@ import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.Adv
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.mapper.AdvertisementMapper;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.AdvertisementEntityRepository;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.repository.MoodEntityRepository;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -26,10 +28,9 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
     private final MoodEntityRepository moodEntityRepository;
 
     @Override
-    public Advertisement findById(Long id) {
-        final AdvertisementEntity advertisementEntity = advertisementEntityRepository.findAdvertisementEntityById(id)
-            .orElseThrow(() -> new RuntimeException("advertisement not found"));
-        return advertisementMapper.toDomain(advertisementEntity);
+    public Optional<Advertisement> findById(final Long id) {
+        return advertisementEntityRepository.findById(id)
+                .map(advertisementMapper::toDomain);
     }
 
     @Override
@@ -64,9 +65,26 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
                 .toList();
     }
 
-    public void updateArchivedStatus(Advertisement advertisement) {
+    @Override
+    public void save(final Advertisement advertisement) {
         final AdvertisementEntity advertisementEntity = advertisementMapper.toEntity(advertisement);
-        advertisementEntityRepository.updateArchivedStatus(advertisementEntity.getId(), advertisementEntity.getIsArchived(), advertisementEntity.getArchivedAt());
+        advertisementEntityRepository.save(advertisementEntity);
+    }
+
+    @Override
+    public List<Advertisement> findAllBySort(String kwdVal, LocalDateTime start, LocalDateTime end) {
+        return advertisementEntityRepository.findAllBySort(kwdVal, start, end)
+                .stream()
+                .map(advertisementMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<Advertisement> findAllByRelation(String kwdVal, LocalDateTime start, LocalDateTime end) {
+        return advertisementEntityRepository.findAllByRelation(kwdVal, start, end)
+                .stream()
+                .map(advertisementMapper::toDomain)
+                .toList();
     }
 
 }
