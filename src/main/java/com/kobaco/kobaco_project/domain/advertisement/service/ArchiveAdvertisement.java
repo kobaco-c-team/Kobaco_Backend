@@ -12,8 +12,9 @@ public class ArchiveAdvertisement {
         private final AdvertisementRepository advertisementRepository;
 
         public void archiveAdvertisement(Long advertisementId) {
-            Advertisement advertisement = advertisementRepository.findById(advertisementId);
+            Advertisement advertisement = advertisementRepository.findById(advertisementId)
+                    .orElseThrow(() -> new IllegalArgumentException("해당 광고가 존재하지 않습니다."));
             advertisement.archive();
-            advertisementRepository.updateArchivedStatus(advertisement);
+            advertisementRepository.save(advertisement);
         }
 }
