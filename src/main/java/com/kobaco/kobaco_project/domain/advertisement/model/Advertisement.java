@@ -16,9 +16,11 @@ public class Advertisement {
     private String manufacturer;
     private Boolean isArchived;
     private LocalDateTime archivedAt;
+    private LocalDateTime createdAt;
 
-    public static Advertisement of(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived, LocalDateTime archivedAt) {
-        return new Advertisement(id, title, videoUrl, advertiser, agency, manufacturer, isArchived, archivedAt);
+    public static Advertisement of(Long id, String title, String videoUrl, String advertiser, String agency, String manufacturer, Boolean isArchived, LocalDateTime archivedAt
+            , LocalDateTime createdAt) {
+        return new Advertisement(id, title, videoUrl, advertiser, agency, manufacturer, isArchived, archivedAt, createdAt);
     }
 
     public void archive() {

@@ -9,6 +9,9 @@ import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadMood;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadItem;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadPerson;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ public class AdvertisementApplication {
     private final ReadAdvertisementSimilar readAdvertisementSimilar;
     private final ArchiveAdvertisement archiveAdvertisement;
     private final ReadAiAnalysis readAiAnalysis;
+    private final CalculateAdvertisementTime calculateAdvertisementTime;
 
 
     @Transactional(readOnly = true)
@@ -109,5 +113,18 @@ public class AdvertisementApplication {
                     readAiAnalysis.readAiAnalysis(advertisementId, category));
         }
         return null;
+    }
+
+    @Transactional(readOnly = true)
+    public AdvertisementListResponse getAdvertisementList(String sortType, String kwdVal, LocalDate startDate, LocalDate endDate) {
+        List<Advertisement> advertisementList = readAdvertisement.getAdvertisementList(sortType, kwdVal, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+        List<Long> advertisementIdList = advertisementList.stream().map(Advertisement::getId).toList();
+        Map<Long, Long> advertisementMap = calculateAdvertisementTime.calculateAdvertisementTimeByIds(advertisementIdList);
+        return AdvertisementListResponse.of(
+                advertisementList.stream()
+                        .map(advertisement -> AdvertisementSimpleResponse.from(advertisement, advertisementMap.get(advertisement.getId())))
+                        .toList()
+        );
+
     }
 }

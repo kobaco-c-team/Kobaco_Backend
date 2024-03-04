@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ExpressionRepository {
     List<Expression> findAllByAdvertisementId(Long advertisement_id);
+    List<Expression> findExpressionIdsByAdvertisementIds(List<Long> advertisementIds);
 }

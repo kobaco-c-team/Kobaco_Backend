@@ -16,7 +16,8 @@ public class AdvertisementMapper {
             advertisementEntity.getAgency(),
             advertisementEntity.getManufacturer(),
             advertisementEntity.getIsArchived(),
-            advertisementEntity.getArchivedAt()
+            advertisementEntity.getArchivedAt(),
+            advertisementEntity.getCreatedAt()
         );
     }
 
