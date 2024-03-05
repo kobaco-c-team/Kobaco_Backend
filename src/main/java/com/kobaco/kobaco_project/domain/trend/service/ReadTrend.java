@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class ReadTrend {
     private final TrendRepository trendRepository;
 
-    public Trend getPersonTrend(String trendKwd) {
+    public Trend getTrend(String trendKwd) {
         return trendRepository.findByTrendKeyword(trendKwd)
                 .orElseThrow(() -> new IllegalArgumentException("해당 트렌드가 존재하지 않습니다."));
     }
