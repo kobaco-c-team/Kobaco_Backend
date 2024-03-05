@@ -3,6 +3,8 @@ package com.kobaco.kobaco_project.application.advertisement;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
+import com.kobaco.kobaco_project.domain.advertisement.model.Mood;
 import com.kobaco.kobaco_project.domain.advertisement.service.*;
 import com.kobaco.kobaco_project.domain.advertisement.service.ArchiveAdvertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
@@ -29,6 +31,7 @@ public class AdvertisementApplication {
     private final ArchiveAdvertisement archiveAdvertisement;
     private final ReadAiAnalysis readAiAnalysis;
     private final CalculateAdvertisementTime calculateAdvertisementTime;
+    private final TopExpression topExpression;
 
 
     @Transactional(readOnly = true)
@@ -126,5 +129,23 @@ public class AdvertisementApplication {
                         .toList()
         );
 
+    }
+
+    @Transactional(readOnly = true)
+        public ArchiveAdvertisementListResponse getArchiveList(String kwdVal, ExpressionType expressionType, String moodVal) {
+        List<Advertisement> advertisementList = readAdvertisement.getArchiveList(kwdVal, expressionType, moodVal);
+        List<Long> advertisementIdList = advertisementList.stream().map(Advertisement::getId).toList();
+        Map<Long, List<Mood>> moodMap = readMood.getMoodByAdvertisementIds(advertisementIdList);
+        Map<Long, ExpressionType> advertisementMap = topExpression.getTopExpressionByAdvertisementIds(advertisementIdList);
+        return ArchiveAdvertisementListResponse.of(
+                advertisementList.stream()
+                        .map(advertisement -> ArchiveAdvertisementResponse.from(advertisement, advertisementMap.get(advertisement.getId()),
+                                moodMap.get(advertisement.getId())
+                                        .stream()
+                                        .map(mood -> MoodInfoResponse.of(mood.getType()))
+                                        .toList()
+                                ))
+                        .toList()
+        );
     }
 }

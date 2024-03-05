@@ -2,9 +2,11 @@ package com.kobaco.kobaco_project.domain.advertisement.service;
 
 import com.kobaco.kobaco_project.common.annotation.DomainService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
 import com.kobaco.kobaco_project.domain.advertisement.query.AdvertisementRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
 @DomainService
@@ -31,5 +33,10 @@ public class ReadAdvertisement {
         }
     }
 
+    public List<Advertisement> getArchiveList(String kwdVal, ExpressionType expressionType, String moodVal) {
+        return Optional.ofNullable(expressionType)
+                .map(et -> advertisementRepository.findAllByArchiveWithExpression(kwdVal, et, moodVal))
+                .orElse(advertisementRepository.findAllByArchive(kwdVal, moodVal));
+    }
 
 }
