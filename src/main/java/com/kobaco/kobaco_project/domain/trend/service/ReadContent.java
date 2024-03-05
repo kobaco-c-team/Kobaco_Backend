@@ -2,6 +2,7 @@ package com.kobaco.kobaco_project.domain.trend.service;
 
 import com.kobaco.kobaco_project.common.annotation.DomainService;
 import com.kobaco.kobaco_project.domain.trend.model.Content;
+import com.kobaco.kobaco_project.domain.trend.model.ContentWithTag;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class ReadContent {
         this.readPlatformTrendAnalysis = readPlatTrendAnalysis;
     }
 
-    public List<Content> readContent(String kwdVal) {
+    public List<ContentWithTag> readContent(String kwdVal) {
         return this.readPlatformTrendAnalysis.getTrendAnalysis(kwdVal);
     }
 }

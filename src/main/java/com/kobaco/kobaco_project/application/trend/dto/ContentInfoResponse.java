@@ -2,6 +2,7 @@ package com.kobaco.kobaco_project.application.trend.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kobaco.kobaco_project.domain.trend.model.Content;
+import com.kobaco.kobaco_project.domain.trend.model.ContentWithTag;
 import lombok.Builder;
 
 import java.util.List;
@@ -14,13 +15,13 @@ public record ContentInfoResponse(
         @JsonInclude(JsonInclude.Include.NON_NULL) Integer like,
         @JsonInclude(JsonInclude.Include.NON_NULL) String publisher
 ) {
-    public static ContentInfoResponse from(Content content){
+    public static ContentInfoResponse from(ContentWithTag contentWithTag){
         return ContentInfoResponse.builder()
-                .imageUrl(content.getImageUrl())
-                .title(content.getTitle())
-                .tags(content.getTags())
-                .like(content.getLike())
-                .publisher(content.getPublisher())
+                .imageUrl(contentWithTag.getImageUrl())
+                .title(contentWithTag.getTitle())
+                .tags(contentWithTag.getTags())
+                .like(contentWithTag.getLike())
+                .publisher(contentWithTag.getPublisher())
                 .build();
     }
 

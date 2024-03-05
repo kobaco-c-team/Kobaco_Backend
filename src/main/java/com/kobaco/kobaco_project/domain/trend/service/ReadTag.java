@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReadTag {
     private final TagRepository tagRepository;
-    public List<Tag> readTag(String kwdVal) {
-        return this.tagRepository.findAllKeywordId(kwdVal);
+    public List<Tag> readTag(String kwdVal, String platform) {
+        return this.tagRepository.findAllByKeywordNameAndPlatform(kwdVal,platform);
     }
 }

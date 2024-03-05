@@ -32,7 +32,7 @@ public class TrendApplication {
 
         return TrendAnalysisResponse.builder()
                 .tagInfoResponseList(
-                        readTag.readTag(kwdVal).stream()
+                        readTag.readTag(kwdVal, snsType).stream()
                                 .map(TagInfoResponse::from)
                                 .toList()
                 )

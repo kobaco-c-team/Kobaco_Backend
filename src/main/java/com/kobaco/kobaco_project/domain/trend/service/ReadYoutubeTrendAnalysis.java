@@ -2,6 +2,7 @@ package com.kobaco.kobaco_project.domain.trend.service;
 
 import com.kobaco.kobaco_project.common.annotation.DomainService;
 import com.kobaco.kobaco_project.domain.trend.model.Content;
+import com.kobaco.kobaco_project.domain.trend.model.ContentWithTag;
 import com.kobaco.kobaco_project.domain.trend.model.TrendAnalysis;
 import com.kobaco.kobaco_project.domain.trend.query.ContentRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +14,17 @@ import java.util.List;
 public class ReadYoutubeTrendAnalysis implements ReadPlatformTrendAnalysis{
     private final ContentRepository contentRepository;
     @Override
-    public List<Content> getTrendAnalysis(String kwdVal) {
-        List<Content> contentList = this.contentRepository.findBykeywordId(kwdVal);
-        for(Content content : contentList) {
-            content.setLike(null);
-            content.setTags(null);
-        }
-        return contentList;
+    public List<ContentWithTag> getTrendAnalysis(String kwdVal) {
+        List<Content> contentList = this.contentRepository.findByKeywordNameAndPlatform(kwdVal, "YOUTUBE");
+        return contentList.stream()
+                .map(content -> ContentWithTag.builder()
+                        .imageUrl(content.getImageUrl())
+                        .title(content.getTitle())
+                        .tags(null)
+                        .like(null)
+                        .publisher(content.getPublisher())
+                        .build()
+                )
+                .toList();
     }
 }

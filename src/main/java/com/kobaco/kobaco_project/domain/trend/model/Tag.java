@@ -8,4 +8,8 @@ import lombok.Getter;
 public class Tag {
     private String name;
     private Integer count;
+
+    public static Tag of(String name, Integer count) {
+        return new Tag(name, count);
+    }
 }
