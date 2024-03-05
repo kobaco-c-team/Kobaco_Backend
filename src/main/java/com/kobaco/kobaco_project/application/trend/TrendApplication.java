@@ -22,11 +22,11 @@ public class TrendApplication {
     private final ReadAgeTrend readAgeTrend;
     private final ReadGenderTrend readGenderTrend;
 
-    public PersonTrendResponse getPersonTrend(String trendKwd) {
+    public PersonStatisticResponse getPersonStatistic(String trendKwd) {
         Trend trend = readTrend.getTrend(trendKwd);
         List<Age> ages = readAgeTrend.getAgesTrend(trend.getId());
         List<Gender> genders = readGenderTrend.getGendersTrend(trend.getId());
-        return PersonTrendResponse.of(
+        return PersonStatisticResponse.of(
             ages.stream()
                 .map(AgeStatisticResponse::of)
                 .collect(Collectors.toList()),

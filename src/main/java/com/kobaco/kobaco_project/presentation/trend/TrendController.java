@@ -20,8 +20,8 @@ public class TrendController {
 
     @Operation(summary = "트렌드 성별&나이 분석 조회")
     @GetMapping("/person")
-    public PersonTrendResponse getPersonTrend(@RequestParam String trendKwd) {
-        return trendApplication.getPersonTrend(trendKwd);
+    public PersonStatisticResponse getPersonStatistic(@RequestParam String trendKwd) {
+        return trendApplication.getPersonStatistic(trendKwd);
     }
 
 
