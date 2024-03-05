@@ -22,4 +22,13 @@ public class MoodRepositoryImpl implements MoodRepository {
                 .map(moodMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public List<Mood> findMoodByAdvertisementIds(List<Long> advertisementIds) {
+        return moodEntityRepository.findAllByAdvertisementIds(advertisementIds)
+                .stream()
+                .map(moodMapper::toDomain)
+                .toList();
+    }
+
 }

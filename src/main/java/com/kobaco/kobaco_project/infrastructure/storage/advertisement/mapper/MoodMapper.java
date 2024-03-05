@@ -9,7 +9,8 @@ public class MoodMapper {
     public Mood toDomain(final MoodEntity moodEntity) {
         return Mood.of(
             moodEntity.getId(),
-            moodEntity.getType()
+            moodEntity.getType(),
+            moodEntity.getAdvertisementEntity().getId()
         );
     }
 }

@@ -9,9 +9,9 @@ public class ExpressionMapper {
     public Expression toDomain(final ExpressionEntity expressionEntity) {
         return Expression.of(
                 expressionEntity.getId(),
-                expressionEntity.getExpressionType().getDescription(),
+                expressionEntity.getExpressionType(),
                 expressionEntity.getTime(),
-                expressionEntity.getAdvertisementId()
+                expressionEntity.getAdvertisementEntity().getId()
         );
     }
 }
