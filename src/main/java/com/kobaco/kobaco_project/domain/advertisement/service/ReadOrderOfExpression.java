@@ -2,6 +2,7 @@ package com.kobaco.kobaco_project.domain.advertisement.service;
 
 import com.kobaco.kobaco_project.common.annotation.DomainService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
 import com.kobaco.kobaco_project.domain.advertisement.query.ExpressionRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,7 @@ public class ReadOrderOfExpression {
                 .collect(Collectors.groupingBy(Expression::getType, Collectors.counting()))
                 .entrySet().stream()
                 // 먼저 빈도의 내림차순으로 정렬
-                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .sorted(Map.Entry.<ExpressionType, Long>comparingByValue().reversed())
                 .skip(1) // 첫 번째(가장 많이 나타나는) 요소 건너뛰기
                 .findFirst() // 두 번째로 많이 나타나는 요소 가져오기
                 .map(Map.Entry::getKey)
