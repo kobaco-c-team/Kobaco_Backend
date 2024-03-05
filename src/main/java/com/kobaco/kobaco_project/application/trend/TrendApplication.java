@@ -23,7 +23,7 @@ public class TrendApplication {
     private final ReadGenderTrend readGenderTrend;
 
     public PersonTrendResponse getPersonTrend(String trendKwd) {
-        Trend trend = readTrend.getPersonTrend(trendKwd);
+        Trend trend = readTrend.getTrend(trendKwd);
         List<Age> ages = readAgeTrend.getAgesTrend(trend.getId());
         List<Gender> genders = readGenderTrend.getGendersTrend(trend.getId());
         return PersonTrendResponse.of(
