@@ -7,6 +7,8 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.Advertis
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementInfoResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementListResponse;
 import com.kobaco.kobaco_project.application.advertisement.dto.response.AdvertisementSimilarListResponse;
+import com.kobaco.kobaco_project.application.advertisement.dto.response.ArchiveAdvertisementListResponse;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
 import io.swagger.v3.oas.annotations.Operation;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
@@ -79,4 +81,18 @@ public class AdvertisementController {
         AdvertisementListResponse advertisementListResponse = advertisementApplication.getAdvertisementList(sortType, kwdVal, startDate, endDate);
         return advertisementListResponse;
     }
+
+    @Operation(summary = "광고 스크랩 리스트 조회 \n"
+            + "kwdVal은 검색어, expressionType은 표정, moodVal은 분위기, kwdVal이 없으면 빈 문자열을 넣어주세요, expressionType이 없으면 null을 넣어주세요, moodVal이 없으면 빈 문자열을 넣어주세요."
+            + "expressionType은 {SMILLING, SAD, SURPRISED, EXPRESSIONLESS, ANGRY, FROWN, SCARED} 중 하나를 넣어주세요.")
+    @GetMapping("/archive")
+    public ArchiveAdvertisementListResponse getArchiveList(
+            @RequestParam(value = "kwdVal", required = false) String kwdVal,
+            @RequestParam(value = "expressionType", required = false) ExpressionType expressionType,
+            @RequestParam(value = "moodVal", required = false) String moodVal
+    ) {
+        ArchiveAdvertisementListResponse archiveAdvertisementListResponse = advertisementApplication.getArchiveList(kwdVal, expressionType, moodVal);
+        return archiveAdvertisementListResponse;
+    }
+
 }
