@@ -68,8 +68,9 @@ public class AdvertisementController {
         return advertisementApplication.getAiAnalysis(advertisementId, category);
     }
 
-    @Operation(summary = "광고 리스트 조회 & 검색 sortType 최신순은 LATEST, 관련도순은 RELATION, kwdVal은 검색어, startDate는 시작일, endDate는 종료일, "
-            + "kwdVal이 없으면 빈 문자열을 넣어주세요, startDate와 endDate는 yyyy-MM-dd 형식으로 넣어주세요."
+    @Operation(summary = "광고 리스트 조회 & 검색 sortType \n"
+            + "최신순은 LATEST, 관련도순은 RELATION, kwdVal은 검색어, startDate는 시작일, endDate는 종료일, "
+            + "kwdVal이 없으면 빈 문자열을 넣어주세요, startDate와 endDate는 yyyy-MM-dd 형식으로 넣어주세요.\n"
             + "기본 정렬이 최신순이라 default는 LATEST로 설정해주세요.")
     @GetMapping("/list")
     public AdvertisementListResponse getAdvertisementList(
