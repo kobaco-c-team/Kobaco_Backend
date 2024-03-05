@@ -15,17 +15,19 @@ public class ExpressionEntity  extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     private ExpressionType expressionType;
     private Double time;
-    private Long advertisementId;
 
-    private ExpressionEntity(ExpressionType expressionType, Double time, Long advertisementId){
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "advertisement_id")
+    private AdvertisementEntity advertisementEntity;
+
+    private ExpressionEntity(ExpressionType expressionType, Double time, AdvertisementEntity advertisementEntity){
         this.expressionType =expressionType;
         this.time=time;
-        this.advertisementId =advertisementId;
+        this.advertisementEntity = advertisementEntity;
     }
 
-    public static ExpressionEntity of(ExpressionType expressionType, Double time, Long advertisementId){
-        return new ExpressionEntity(expressionType,time,advertisementId);
-    }
 }

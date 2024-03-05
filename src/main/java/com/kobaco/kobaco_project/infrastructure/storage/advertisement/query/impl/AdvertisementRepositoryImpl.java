@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.infrastructure.storage.advertisement.query.impl;
 
 import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
 import com.kobaco.kobaco_project.domain.advertisement.model.Mood;
 import com.kobaco.kobaco_project.domain.advertisement.query.AdvertisementRepository;
 import com.kobaco.kobaco_project.infrastructure.storage.advertisement.entity.AdvertisementEntity;
@@ -87,4 +88,19 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
                 .toList();
     }
 
+    @Override
+    public List<Advertisement> findAllByArchiveWithExpression(String kwdVal, ExpressionType expressionType, String moodVal) {
+        return advertisementEntityRepository.findAllByArchiveWithExpression(kwdVal, expressionType, moodVal)
+                .stream()
+                .map(advertisementMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<Advertisement> findAllByArchive(String kwdVal, String moodVal) {
+        return advertisementEntityRepository.findAllByArchive(kwdVal, moodVal)
+                .stream()
+                .map(advertisementMapper::toDomain)
+                .toList();
+    }
 }

@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface MoodRepository {
     List<Mood> findAllByAdvertisementId(Long advertisementId);
+    List<Mood> findMoodByAdvertisementIds(List<Long> advertisementIds);
 }

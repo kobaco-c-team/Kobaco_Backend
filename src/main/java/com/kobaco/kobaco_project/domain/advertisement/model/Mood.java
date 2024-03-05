@@ -9,8 +9,9 @@ import lombok.Getter;
 public class Mood {
     private Long id;
     private String type;
+    private Long advertisementId;
 
-    public static Mood of(Long id, String type) {
-        return new Mood(id, type);
+    public static Mood of(Long id, String type, Long advertisementId) {
+        return new Mood(id, type, advertisementId);
     }
 }
