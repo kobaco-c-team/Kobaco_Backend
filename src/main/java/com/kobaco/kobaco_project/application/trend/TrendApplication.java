@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @ApplicationService
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class TrendApplication {
     private final ReadGenderTrend readGenderTrend;
     private final CalculateSearchVolume caculateSearchVolume;
 
+    @Transactional(readOnly = true)
     public PersonStatisticResponse getPersonStatistic(String trendKwd) {
         Trend trend = readTrend.getTrend(trendKwd);
         List<Age> ages = readAgeTrend.getAgesTrend(trend.getId());
@@ -43,6 +45,7 @@ public class TrendApplication {
         );
     }
 
+    @Transactional(readOnly = true)
     public TimeStatisticResponse getTimeStatistic(String trendKwd) {
         Trend trend = readTrend.getTrend(trendKwd);
         Map<String, Object> timeStatisticMap = caculateSearchVolume.getTimeStatistic(trend.getId());
