@@ -13,6 +13,6 @@ import java.util.List;
 public class ReadTag {
     private final TagRepository tagRepository;
     public List<Tag> readTag(String kwdVal, String platform) {
-        return this.tagRepository.findAllByKeywordNameAndPlatform(kwdVal,platform);
+        return tagRepository.findAllByKeywordNameAndPlatform(kwdVal,platform);
     }
 }

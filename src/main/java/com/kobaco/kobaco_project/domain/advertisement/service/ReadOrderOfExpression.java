@@ -16,7 +16,7 @@ public class ReadOrderOfExpression {
     private final ExpressionRepository expressionRepository;
 
     public String readFirstExpression(Long advertisementId){
-        return this.expressionRepository.findAllByAdvertisementId(advertisementId)
+        return expressionRepository.findAllByAdvertisementId(advertisementId)
                 .stream()
                 .collect(Collectors.groupingBy(Expression::getType, Collectors.counting()))
                 .entrySet().stream()
@@ -26,7 +26,7 @@ public class ReadOrderOfExpression {
     }
 
     public String readSecondExpression(Long advertisementId){
-        return this.expressionRepository.findAllByAdvertisementId(advertisementId)
+        return expressionRepository.findAllByAdvertisementId(advertisementId)
                 .stream()
                 .collect(Collectors.groupingBy(Expression::getType, Collectors.counting()))
                 .entrySet().stream()

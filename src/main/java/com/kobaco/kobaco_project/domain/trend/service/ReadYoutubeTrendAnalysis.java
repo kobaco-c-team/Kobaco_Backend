@@ -15,7 +15,7 @@ public class ReadYoutubeTrendAnalysis implements ReadPlatformTrendAnalysis{
     private final ContentRepository contentRepository;
     @Override
     public List<ContentWithTag> getTrendAnalysis(String kwdVal) {
-        List<Content> contentList = this.contentRepository.findByKeywordNameAndPlatform(kwdVal, "YOUTUBE");
+        List<Content> contentList = contentRepository.findByKeywordNameAndPlatform(kwdVal, "YOUTUBE");
         return contentList.stream()
                 .map(content -> ContentWithTag.builder()
                         .imageUrl(content.getImageUrl())

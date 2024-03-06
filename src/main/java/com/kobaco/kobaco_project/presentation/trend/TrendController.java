@@ -27,6 +27,6 @@ public class TrendController {
             @RequestParam(value = "kwdVal") String kwdVal,
             @RequestParam(value = "snsType") String snsType
     ){
-        return this.trendApplication.getTrendAnalysis(kwdVal, snsType);
+        return trendApplication.getTrendAnalysis(kwdVal, snsType);
     }
 }

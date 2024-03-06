@@ -19,7 +19,7 @@ public class ReadExpressionSection {
     private final ExpressionRepository expressionRepository;
 
     public List<ExpressionSection> getExpressionSection(Long advertisementId){
-        List<Expression> expressionList = this.expressionRepository.findAllByAdvertisementId(advertisementId);
+        List<Expression> expressionList = expressionRepository.findAllByAdvertisementId(advertisementId);
 
         expressionList.sort((a,b) -> Double.compare(a.getTime(), b.getTime()));
         List<ExpressionSection> sectionList = new ArrayList<>();

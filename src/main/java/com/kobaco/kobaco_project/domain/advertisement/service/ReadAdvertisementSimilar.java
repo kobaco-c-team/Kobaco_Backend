@@ -18,7 +18,7 @@ public class ReadAdvertisementSimilar {
     private final AdvertisementRepository advertisementRepository;
 
     public List<AdvertisementSimilar> getAdvertisementSimilarList(Long advertisementId) {
-        List<Advertisement> advertisementList = this.advertisementRepository.findAllByMoodList(this.moodRepository.findAllByAdvertisementId(advertisementId), advertisementId);
+        List<Advertisement> advertisementList = advertisementRepository.findAllByMoodList(moodRepository.findAllByAdvertisementId(advertisementId), advertisementId);
 
         List<AdvertisementSimilar> advertisementSimilarList = new ArrayList<>();
         advertisementList
@@ -26,7 +26,7 @@ public class ReadAdvertisementSimilar {
                         advertisement.getVideoUrl(),
                         advertisement.getTitle(),
                         advertisement.getAgency(),
-                        this.moodRepository.findAllByAdvertisementId(advertisement.getId()),
+                        moodRepository.findAllByAdvertisementId(advertisement.getId()),
                         advertisement.getIsArchived()
                 )));
 

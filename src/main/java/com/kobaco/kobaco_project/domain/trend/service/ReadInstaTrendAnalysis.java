@@ -18,12 +18,12 @@ public class ReadInstaTrendAnalysis implements ReadPlatformTrendAnalysis{
 
     @Override
     public List<ContentWithTag> getTrendAnalysis(String kwdVal) {
-        List<Content> contentList = this.contentRepository.findByKeywordNameAndPlatform(kwdVal, "INSTAGRAM");
+        List<Content> contentList = contentRepository.findByKeywordNameAndPlatform(kwdVal, "INSTAGRAM");
         return contentList.stream()
                 .map(content -> ContentWithTag.builder()
                         .imageUrl(content.getImageUrl())
                         .title(content.getTitle())
-                        .tags(this.tagRepository.findAllByContentIdAndPlatform(content.getId(), "INSTAGRAM").stream().map(Tag::getName).toList())
+                        .tags(tagRepository.findAllByContentIdAndPlatform(content.getId(), "INSTAGRAM").stream().map(Tag::getName).toList())
                         .like(content.getLike())
                         .publisher(null)
                         .build()

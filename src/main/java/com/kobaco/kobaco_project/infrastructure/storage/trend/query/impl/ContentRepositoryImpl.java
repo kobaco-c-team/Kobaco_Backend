@@ -16,7 +16,7 @@ public class ContentRepositoryImpl implements ContentRepository {
     private final ContentMapper contentMapper;
     @Override
     public List<Content> findByKeywordNameAndPlatform(String kwdVal, String platform) {
-        return this.contentEntityRepository.findByKeywordEntityNameAndPlatform(kwdVal, platform)
+        return contentEntityRepository.findByKeywordEntityNameAndPlatform(kwdVal, platform)
                 .stream()
                 .map(contentMapper::toDomain)
                 .toList();

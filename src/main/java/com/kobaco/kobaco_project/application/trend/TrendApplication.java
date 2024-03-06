@@ -23,8 +23,8 @@ public class TrendApplication {
     private final ReadYoutubeTrendAnalysis readYoutubeTrendAnalysis;
     @Transactional
     public TrendAnalysisResponse getTrendAnalysis(String kwdVal, String snsType) {
-        if(snsType.equals("INSTAGRAM")) this.readContent.setReadPlatformTrendAnalysis(readInstaTrendAnalysis);
-        else if(snsType.equals("YOUTUBE")) this.readContent.setReadPlatformTrendAnalysis(readYoutubeTrendAnalysis);
+        if(snsType.equals("INSTAGRAM")) readContent.setReadPlatformTrendAnalysis(readInstaTrendAnalysis);
+        else if(snsType.equals("YOUTUBE")) readContent.setReadPlatformTrendAnalysis(readYoutubeTrendAnalysis);
 
         List<ContentInfoResponse> contentInfoResponseList = readContent.readContent(kwdVal).stream()
                 .map(ContentInfoResponse::from)

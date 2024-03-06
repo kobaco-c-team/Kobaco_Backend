@@ -13,10 +13,10 @@ public class ReadContent {
 
 
     public void setReadPlatformTrendAnalysis(ReadPlatformTrendAnalysis readPlatTrendAnalysis) {
-        this.readPlatformTrendAnalysis = readPlatTrendAnalysis;
+        readPlatformTrendAnalysis = readPlatTrendAnalysis;
     }
 
     public List<ContentWithTag> readContent(String kwdVal) {
-        return this.readPlatformTrendAnalysis.getTrendAnalysis(kwdVal);
+        return readPlatformTrendAnalysis.getTrendAnalysis(kwdVal);
     }
 }

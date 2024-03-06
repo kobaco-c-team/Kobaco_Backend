@@ -39,7 +39,7 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
         List<Long> advertisementEntityIdList = new ArrayList<>();
 
         moodList.forEach(mood ->
-                this.moodEntityRepository.findAllByType(mood.getType())
+                moodEntityRepository.findAllByType(mood.getType())
                         .stream()
                         .forEach(foundMood -> advertisementEntityIdList.add(foundMood.getAdvertisementEntity().getId()))
         );
@@ -61,7 +61,7 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
                 .distinct()
                 .filter(id -> !id.equals(advertisementId))
                 .map(id -> {
-                    return advertisementMapper.toDomain(this.advertisementEntityRepository.findAdvertisementEntityById(id).orElseThrow(() -> new RuntimeException("advertisement not found")));
+                    return advertisementMapper.toDomain(advertisementEntityRepository.findAdvertisementEntityById(id).orElseThrow(() -> new RuntimeException("advertisement not found")));
                 })
                 .toList();
     }
