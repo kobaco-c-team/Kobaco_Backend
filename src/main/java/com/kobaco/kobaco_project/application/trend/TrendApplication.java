@@ -21,7 +21,7 @@ public class TrendApplication {
     private final ReadContent readContent;
     private final ReadInstaTrendAnalysis readInstaTrendAnalysis;
     private final ReadYoutubeTrendAnalysis readYoutubeTrendAnalysis;
-    @Transactional
+    @Transactional(readOnly = true)
     public TrendAnalysisResponse getTrendAnalysis(String kwdVal, String snsType) {
         if(snsType.equals("INSTAGRAM")) readContent.setReadPlatformTrendAnalysis(readInstaTrendAnalysis);
         else if(snsType.equals("YOUTUBE")) readContent.setReadPlatformTrendAnalysis(readYoutubeTrendAnalysis);
