@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.presentation.trend;
 
 import com.kobaco.kobaco_project.application.trend.TrendApplication;
+import com.kobaco.kobaco_project.application.trend.dto.TrendAnalysisResponse;
 import com.kobaco.kobaco_project.application.trend.dto.response.TimeStatisticResponse;
 import com.kobaco.kobaco_project.application.trend.dto.response.PersonStatisticResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,8 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/trend")
 @RequiredArgsConstructor
 public class TrendController {
-
     private final TrendApplication trendApplication;
+
+    @Operation(summary = "SNS 트렌드 검색 api 입니다.\n"
+            + "kwdVal은 검색어, snsType은 sns 유형입니다. "
+            + "kwdVal이 없으면 빈 문자열을 넣어주세요. "
+            + "snsType은 {INSTAGRAM, YOUTUBE} 중 하나를 넣어주세요."
+    )
+    @GetMapping("")
+    public TrendAnalysisResponse getTrendAnalysis(
+            @RequestParam(value = "kwdVal") String kwdVal,
+            @RequestParam(value = "snsType") String snsType
+    ){
+        return trendApplication.getTrendAnalysis(kwdVal, snsType);
+    }
+
 
     @Operation(summary = "트렌드 성별&나이 분석 조회")
     @GetMapping("/person")
@@ -30,7 +44,4 @@ public class TrendController {
     public TimeStatisticResponse getTimeStatistic(@RequestParam String trendKwd) {
         return trendApplication.getTimeStatistic(trendKwd);
     }
-
-
-
 }

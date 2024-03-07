@@ -22,11 +22,11 @@ public class ExpressionRepositoryImpl implements ExpressionRepository {
     private final ExpressionMapper expressionMapper;
     @Override
     public List<Expression> findAllByAdvertisementId(Long advertisement_id) {
-        List<ExpressionEntity> expressionEntityList = this.expressionEntityRepository.findAllByAdvertisementEntityId(advertisement_id);
+        List<ExpressionEntity> expressionEntityList = expressionEntityRepository.findAllByAdvertisementEntityId(advertisement_id);
 
         List<Expression> expressionList = new ArrayList<>();
         for(ExpressionEntity expressionEntity : expressionEntityList){
-            expressionList.add(this.expressionMapper.toDomain(expressionEntity));
+            expressionList.add(expressionMapper.toDomain(expressionEntity));
         }
 
         return expressionList;
@@ -34,7 +34,7 @@ public class ExpressionRepositoryImpl implements ExpressionRepository {
 
     @Override
     public List<Expression> findExpressionByAdvertisementIds(List<Long> advertisementIds) {
-        List<ExpressionEntity> expressionEntityList = this.expressionEntityRepository.findAllByAdvertisementIds(advertisementIds);
+        List<ExpressionEntity> expressionEntityList = expressionEntityRepository.findAllByAdvertisementIds(advertisementIds);
         return Optional.ofNullable(expressionEntityList)
                 .map(list -> list.stream().map(expressionMapper::toDomain).toList())
                 .orElse(Collections.emptyList());

@@ -43,13 +43,14 @@ public class AdvertisementApplication {
     @Transactional(readOnly = true)
     public AdvertisementExpressionResponse getAdvertisementExpression(Long advertisementId) {
         return AdvertisementExpressionResponse.of(
-                this.readAllExpressions.getExpressionSection(advertisementId)
+                readAllExpressions.getExpressionSection(advertisementId)
                         .stream()
                         .map(ExpressionSectionResponse::of)
                         .toList()
                 ,
-                this.readOrderOfExpression.readFirstExpression(advertisementId),
-                this.readOrderOfExpression.readSecondExpression(advertisementId)
+                readOrderOfExpression.readFirstExpression(advertisementId),
+                readOrderOfExpression.readSecondExpression(advertisementId,1),
+                readOrderOfExpression.readSecondExpression(advertisementId,2)
         );
     }
 
@@ -74,7 +75,7 @@ public class AdvertisementApplication {
     @Transactional(readOnly = true)
     public AdvertisementSimilarListResponse getAdvertisementSimilarList(Long advertisementId) {
         return AdvertisementSimilarListResponse.from(
-                this.readAdvertisementSimilar.getAdvertisementSimilarList(advertisementId)
+                readAdvertisementSimilar.getAdvertisementSimilarList(advertisementId)
                         .stream()
                         .map(advertisementSimilar -> AdvertisementSimilarResponse.from(advertisementSimilar))
                         .toList()

@@ -38,7 +38,7 @@ public class AdvertisementController {
     @Operation(summary = "광고 표정 분석 조회")
     @GetMapping("/expression/{advertisementId}")
     public AdvertisementExpressionResponse getAdvertisementExpression(@PathVariable Long advertisementId) {
-        AdvertisementExpressionResponse advertisementExpression = this.advertisementApplication.getAdvertisementExpression(advertisementId);
+        AdvertisementExpressionResponse advertisementExpression = advertisementApplication.getAdvertisementExpression(advertisementId);
         return advertisementExpression;
     }
 
