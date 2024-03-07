@@ -48,9 +48,10 @@ public class AdvertisementApplication {
                         .map(ExpressionSectionResponse::of)
                         .toList()
                 ,
-                readOrderOfExpression.readFirstExpression(advertisementId),
-                readOrderOfExpression.readSecondExpression(advertisementId,1),
-                readOrderOfExpression.readSecondExpression(advertisementId,2)
+                readOrderOfExpression.readOrderOfExpression(advertisementId)
+                        .stream()
+                        .map(ExpressionResponse::from)
+                        .toList()
         );
     }
 
