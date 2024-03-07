@@ -46,9 +46,11 @@ public class TrendController {
         return trendApplication.getTimeStatistic(trendKwd);
     }
 
-    @Operation(summary = "네이버 콘텐츠 아카이브 조회")
+    @Operation(summary = "네이버 콘텐츠 아카이브 조회"
+        + "order는 {RECENT, RELEVANT} 중 하나를 넣어주세요"
+    )
     @GetMapping("/archiving")
-    public ContentArchivingListResponse getContentArchiving(@RequestParam String trendKwd){
-        return trendApplication.getContentArchiving(trendKwd);
+    public ContentArchivingListResponse getContentArchiving(@RequestParam String trendKwd, @RequestParam String order){
+        return trendApplication.getContentArchiving(trendKwd,order);
     }
 }

@@ -5,5 +5,5 @@ import com.kobaco.kobaco_project.domain.trend.model.ContentArchiving;
 import java.util.List;
 
 public interface ContentArchivingRepository {
-    List<ContentArchiving> findAllByKeyword(String trendKwd);
+    List<ContentArchiving> findAllByKeyword(String trendKwd, String order);
 }

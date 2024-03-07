@@ -97,9 +97,9 @@ public class TrendApplication {
         );
     }
 
-    public ContentArchivingListResponse getContentArchiving(String trendKwd) {
+    public ContentArchivingListResponse getContentArchiving(String trendKwd, String order) {
         return ContentArchivingListResponse.of(
-                readContentArchiving.readContentArchiving(trendKwd)
+                readContentArchiving.readContentArchiving(trendKwd,order)
                 .stream()
                 .map(ContentArchivingResponse::from)
                 .toList()
