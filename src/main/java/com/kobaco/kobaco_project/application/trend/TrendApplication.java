@@ -4,10 +4,7 @@ import com.kobaco.kobaco_project.application.trend.dto.ContentInfoResponse;
 import com.kobaco.kobaco_project.application.trend.dto.TagInfoResponse;
 import com.kobaco.kobaco_project.application.trend.dto.TrendAnalysisResponse;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
-import com.kobaco.kobaco_project.domain.trend.service.ReadContent;
-import com.kobaco.kobaco_project.domain.trend.service.ReadInstaTrendAnalysis;
-import com.kobaco.kobaco_project.domain.trend.service.ReadTag;
-import com.kobaco.kobaco_project.domain.trend.service.ReadYoutubeTrendAnalysis;
+import com.kobaco.kobaco_project.domain.trend.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,17 +15,11 @@ import java.util.List;
 public class TrendApplication {
 
     private final ReadTag readTag;
-    private final ReadContent readContent;
-    private final ReadInstaTrendAnalysis readInstaTrendAnalysis;
-    private final ReadYoutubeTrendAnalysis readYoutubeTrendAnalysis;
+    private final List<ReadPlatformTrendAnalysis> readPlatformTrendAnalysis; //이렇게 interface의 List 형태로 bean을 주입 받으면 interface의 구현체들이 List 안에 담기게 된다.
     @Transactional(readOnly = true)
     public TrendAnalysisResponse getTrendAnalysis(String kwdVal, String snsType) {
-        if(snsType.equals("INSTAGRAM")) readContent.setReadPlatformTrendAnalysis(readInstaTrendAnalysis);
-        else if(snsType.equals("YOUTUBE")) readContent.setReadPlatformTrendAnalysis(readYoutubeTrendAnalysis);
 
-        List<ContentInfoResponse> contentInfoResponseList = readContent.readContent(kwdVal).stream()
-                .map(ContentInfoResponse::from)
-                .toList();
+        List<ContentInfoResponse> contentInfoResponseList = getContentFromDomain(kwdVal, snsType);
 
         return TrendAnalysisResponse.builder()
                 .tagInfoResponseList(
@@ -42,4 +33,17 @@ public class TrendApplication {
                 .numberOfContent(contentInfoResponseList.size())
                 .build();
     }
+
+    private List<ContentInfoResponse> getContentFromDomain(String kwdVal, String snsType){
+        for(ReadPlatformTrendAnalysis readPlatformTrendAnalysis1 : readPlatformTrendAnalysis) {
+            if(readPlatformTrendAnalysis1.isSameType(snsType)){
+                return readPlatformTrendAnalysis1.getTrendAnalysis(kwdVal)
+                        .stream()
+                        .map(ContentInfoResponse::from)
+                        .toList();
+            }
+        }
+        return null;
+    }
 }
+

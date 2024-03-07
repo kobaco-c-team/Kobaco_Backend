@@ -6,15 +6,18 @@ import com.kobaco.kobaco_project.domain.trend.model.ContentWithTag;
 import com.kobaco.kobaco_project.domain.trend.model.Tag;
 import com.kobaco.kobaco_project.domain.trend.query.ContentRepository;
 import com.kobaco.kobaco_project.domain.trend.query.TagRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @DomainService
+@Getter
 @RequiredArgsConstructor
 public class ReadInstaTrendAnalysis implements ReadPlatformTrendAnalysis{
     private final ContentRepository contentRepository;
     private final TagRepository tagRepository;
+    private String snsType = "INSTAGRAM";
 
     @Override
     public List<ContentWithTag> getTrendAnalysis(String kwdVal) {
@@ -29,5 +32,10 @@ public class ReadInstaTrendAnalysis implements ReadPlatformTrendAnalysis{
                         .build()
                 )
                 .toList();
+    }
+
+    @Override
+    public boolean isSameType(String snsType) {
+        return snsType.equals("INSTAGRAM");
     }
 }

@@ -5,6 +5,7 @@ import com.kobaco.kobaco_project.domain.trend.model.Content;
 import com.kobaco.kobaco_project.domain.trend.model.ContentWithTag;
 import com.kobaco.kobaco_project.domain.trend.model.TrendAnalysis;
 import com.kobaco.kobaco_project.domain.trend.query.ContentRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReadYoutubeTrendAnalysis implements ReadPlatformTrendAnalysis{
     private final ContentRepository contentRepository;
+
     @Override
     public List<ContentWithTag> getTrendAnalysis(String kwdVal) {
         List<Content> contentList = contentRepository.findByKeywordNameAndPlatform(kwdVal, "YOUTUBE");
@@ -26,5 +28,10 @@ public class ReadYoutubeTrendAnalysis implements ReadPlatformTrendAnalysis{
                         .build()
                 )
                 .toList();
+    }
+
+    @Override
+    public boolean isSameType(String snsType) {
+        return snsType.equals("YOUTUBE");
     }
 }

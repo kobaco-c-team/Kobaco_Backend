@@ -49,7 +49,8 @@ public class AdvertisementApplication {
                         .toList()
                 ,
                 readOrderOfExpression.readFirstExpression(advertisementId),
-                readOrderOfExpression.readSecondExpression(advertisementId)
+                readOrderOfExpression.readSecondExpression(advertisementId,1),
+                readOrderOfExpression.readSecondExpression(advertisementId,2)
         );
     }
 
