@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.presentation.trend;
 
 import com.kobaco.kobaco_project.application.trend.TrendApplication;
+import com.kobaco.kobaco_project.application.trend.dto.ContentArchivingListResponse;
 import com.kobaco.kobaco_project.application.trend.dto.TrendAnalysisResponse;
 import com.kobaco.kobaco_project.application.trend.dto.response.TimeStatisticResponse;
 import com.kobaco.kobaco_project.application.trend.dto.response.PersonStatisticResponse;
@@ -47,7 +48,7 @@ public class TrendController {
 
     @Operation(summary = "네이버 콘텐츠 아카이브 조회")
     @GetMapping("/archiving")
-    public ContentArchivingResponse getContentArchiving(@RequestParam String trendKwd){
+    public ContentArchivingListResponse getContentArchiving(@RequestParam String trendKwd){
         return trendApplication.getContentArchiving(trendKwd);
     }
 }
