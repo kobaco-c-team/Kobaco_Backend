@@ -1,5 +1,6 @@
 package com.kobaco.kobaco_project.application.trend.dto;
 
+import com.kobaco.kobaco_project.domain.trend.model.ContentArchiving;
 import lombok.Builder;
 
 @Builder

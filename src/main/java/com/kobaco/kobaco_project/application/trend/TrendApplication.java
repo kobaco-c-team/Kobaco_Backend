@@ -2,6 +2,7 @@ package com.kobaco.kobaco_project.application.trend;
 
 import com.kobaco.kobaco_project.application.trend.dto.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
+import com.kobaco.kobaco_project.domain.trend.service.ReadContentArchiving;
 import com.kobaco.kobaco_project.domain.trend.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
