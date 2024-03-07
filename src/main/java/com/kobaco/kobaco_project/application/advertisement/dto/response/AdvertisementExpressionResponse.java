@@ -10,9 +10,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Builder
-public record AdvertisementExpressionResponse (List<ExpressionSectionResponse> sectionList, String firstExpression, String secondExpression,String thirdExpression){
+public record AdvertisementExpressionResponse (
+        List<ExpressionSectionResponse> sectionList,
+        List<ExpressionResponse> expressionList
+){
 
-    public static AdvertisementExpressionResponse of(final List<ExpressionSectionResponse> sectionList, String firstExpression, String secondExpression,String thirdExpression){
-        return new AdvertisementExpressionResponse(sectionList, firstExpression,secondExpression,thirdExpression);
+    public static AdvertisementExpressionResponse of(final List<ExpressionSectionResponse> sectionList, List<ExpressionResponse> expressionList){
+        return new AdvertisementExpressionResponse(sectionList, expressionList);
     }
 }

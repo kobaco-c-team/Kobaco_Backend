@@ -1,12 +1,15 @@
 package com.kobaco.kobaco_project.domain.advertisement.service;
 
+import com.kobaco.kobaco_project.application.advertisement.dto.response.ExpressionResponse;
 import com.kobaco.kobaco_project.common.annotation.DomainService;
 import com.kobaco.kobaco_project.domain.advertisement.model.Expression;
 import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
+import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionWithPercentage;
 import com.kobaco.kobaco_project.domain.advertisement.query.ExpressionRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -15,28 +18,20 @@ import java.util.stream.Collectors;
 public class ReadOrderOfExpression {
     private final ExpressionRepository expressionRepository;
 
-    public String readFirstExpression(Long advertisementId){
-        return expressionRepository.findAllByAdvertisementId(advertisementId)
+    public List<ExpressionWithPercentage> readOrderOfExpression(Long advertisementId) {
+        Map<ExpressionType, Long> expressionCounts = expressionRepository.findAllByAdvertisementId(advertisementId)
                 .stream()
-                .collect(Collectors.groupingBy(Expression::getType, Collectors.counting()))
-                .entrySet().stream()
-                .max(Comparator.comparing(Map.Entry::getValue))
-                .map(Map.Entry::getKey)
-                .toString();
-    }
+                .collect(Collectors.groupingBy(Expression::getType, Collectors.counting()));
 
-    public String readSecondExpression(Long advertisementId, int index){
-        return expressionRepository.findAllByAdvertisementId(advertisementId)
+        long totalExpressions = expressionCounts.values().stream().mapToLong(Long::longValue).sum();
+
+        return expressionCounts
+                .entrySet()
                 .stream()
-                .collect(Collectors.groupingBy(Expression::getType, Collectors.counting()))
-                .entrySet().stream()
-                // 먼저 빈도의 내림차순으로 정렬
                 .sorted(Map.Entry.<ExpressionType, Long>comparingByValue().reversed())
-                .skip(index) // 첫 번째(가장 많이 나타나는) 요소 건너뛰기
-                .findFirst() // 두 번째로 많이 나타나는 요소 가져오기
-                .map(Map.Entry::getKey)
-                .toString();
+                .map(entry -> ExpressionWithPercentage.of(entry.getKey(),  (long) ( (entry.getValue()/ (double) totalExpressions)*100) ))
+                .limit(3)
+                .toList();
+
     }
-
-
 }
