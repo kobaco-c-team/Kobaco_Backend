@@ -73,16 +73,16 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
     }
 
     @Override
-    public List<Advertisement> findAllBySort(String kwdVal, LocalDateTime start, LocalDateTime end) {
-        return advertisementEntityRepository.findAllBySort(kwdVal, start, end)
+    public List<Advertisement> findAllBySort(String kwdVal, LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllBySort(kwdVal, start, end, expressionTypeList, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public List<Advertisement> findAllByRelation(String kwdVal, LocalDateTime start, LocalDateTime end) {
-        return advertisementEntityRepository.findAllByRelation(kwdVal, start, end)
+    public List<Advertisement> findAllByRelation(String kwdVal, LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllByRelation(kwdVal, start, end, expressionTypeList, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();

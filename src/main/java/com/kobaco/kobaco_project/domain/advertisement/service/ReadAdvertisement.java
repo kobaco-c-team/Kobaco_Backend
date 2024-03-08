@@ -23,11 +23,11 @@ public class ReadAdvertisement {
     }
 
     public List<Advertisement> getAdvertisementList(String sortType, String kwdVal,
-                                                    LocalDateTime start, LocalDateTime end) {
+                                                    LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
         if (SORT_BY_DATE.equals(sortType)) {
-            return advertisementRepository.findAllBySort(kwdVal, start, end);
+            return advertisementRepository.findAllBySort(kwdVal, start, end, expressionTypeList, moodTypeList);
         } else if (SORT_BY_RELATION.equals(sortType)) {
-            return advertisementRepository.findAllByRelation(kwdVal, start, end);
+            return advertisementRepository.findAllByRelation(kwdVal, start, end, expressionTypeList, moodTypeList);
         } else {
             throw new IllegalArgumentException("정렬 타입이 올바르지 않습니다.");
         }
