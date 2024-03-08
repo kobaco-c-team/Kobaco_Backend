@@ -2,6 +2,7 @@ package com.kobaco.kobaco_project.application.trend;
 
 import com.kobaco.kobaco_project.application.trend.dto.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
+import com.kobaco.kobaco_project.domain.trend.model.Tag;
 import com.kobaco.kobaco_project.domain.trend.service.ReadContentArchiving;
 import com.kobaco.kobaco_project.domain.trend.service.*;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class TrendApplication {
         return TrendAnalysisResponse.builder()
                 .tagInfoResponseList(
                         readTag.readTag(kwdVal, snsType).stream()
-                                .map(TagInfoResponse::from)
+                                .map(Tag::getName)
                                 .toList()
                 )
                 .contentInfoResponseList(
