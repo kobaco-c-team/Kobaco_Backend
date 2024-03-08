@@ -56,12 +56,12 @@ public interface AdvertisementEntityRepository extends JpaRepository<Advertiseme
     where(:kwdVal is null or (:kwdVal is not null and (a.title like %:kwdVal% 
            or i.name like %:kwdVal% 
            or p.name like %:kwdVal% ) ))
-    and (:expressionType is null or (:expressionType is not null and e.expressionType = :expressionType))
-    and (:moodVal is null or (:moodVal is not null and m.type = :moodVal))
+    and (:expressionTypeList is null or (:expressionTypeList is not null and e.expressionType in :expressionTypeList))
+    and (:moodTypeList is null or (:moodTypeList is not null and m.type in :moodTypeList))
     and a.isArchived = true
     order by a.archivedAt desc
     """)
-    List<AdvertisementEntity> findAllByArchiveWithExpression(@Param("kwdVal") String kwdVal, @Param("expressionType") ExpressionType expressionType, @Param("moodVal") String moodVal);
+    List<AdvertisementEntity> findAllByArchiveWithExpression(@Param("kwdVal") String kwdVal, @Param("expressionTypeList") List<ExpressionType> expressionTypeList, @Param("moodTypeList") List<String> moodTypeList);
 
     @Query("""
     select a from AdvertisementEntity a
@@ -71,9 +71,9 @@ public interface AdvertisementEntityRepository extends JpaRepository<Advertiseme
     where(:kwdVal is null or (:kwdVal is not null and (a.title like %:kwdVal% 
            or i.name like %:kwdVal% 
            or p.name like %:kwdVal% ) ))
-    and (:moodVal is null or (:moodVal is not null and m.type = :moodVal))
+    and (:moodTypeList is null or (:moodTypeList is not null and m.type in :moodTypeList))
     and a.isArchived = true
     order by a.archivedAt desc
     """)
-    List<AdvertisementEntity> findAllByArchive(@Param("kwdVal") String kwdVal, @Param("moodVal") String moodVal);
+    List<AdvertisementEntity> findAllByArchive(@Param("kwdVal") String kwdVal, @Param("moodTypeList") List<String> moodTypeList);
 }

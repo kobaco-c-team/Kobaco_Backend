@@ -134,8 +134,8 @@ public class AdvertisementApplication {
     }
 
     @Transactional(readOnly = true)
-        public ArchiveAdvertisementListResponse getArchiveList(String kwdVal, ExpressionType expressionType, String moodVal) {
-        List<Advertisement> advertisementList = readAdvertisement.getArchiveList(kwdVal, expressionType, moodVal);
+        public ArchiveAdvertisementListResponse getArchiveList(String kwdVal, List<ExpressionType> expressionType, List<String> moodType) {
+        List<Advertisement> advertisementList = readAdvertisement.getArchiveList(kwdVal, expressionType, moodType);
         List<Long> advertisementIdList = advertisementList.stream().map(Advertisement::getId).toList();
         Map<Long, List<Mood>> moodMap = readMood.getMoodByAdvertisementIds(advertisementIdList);
         Map<Long, ExpressionType> advertisementMap = topExpression.getTopExpressionByAdvertisementIds(advertisementIdList);

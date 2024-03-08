@@ -89,16 +89,17 @@ public class AdvertisementController {
         return advertisementListResponse;
     }
 
-    @Operation(summary = "광고 스크랩 리스트 조회 \n"
-            + "kwdVal은 검색어, expressionType은 표정, moodVal은 분위기, kwdVal이 없으면 빈 문자열을 넣어주세요, expressionType이 없으면 null을 넣어주세요, moodVal이 없으면 빈 문자열을 넣어주세요."
-            + "expressionType은 {SMILLING, SAD, SURPRISED, EXPRESSIONLESS, ANGRY, FROWN, SCARED} 중 하나를 넣어주세요.")
+    @Operation(summary = """
+            광고 스크랩 리스트 조회 
+            kwdVal은 검색어, expressionType은 표정, moodVal은 분위기, kwdVal이 없으면 빈 문자열을 넣어주세요, expressionType이 없으면 null을 넣어주세요, moodType이 없으면 빈 문자열을 넣어주세요
+            expressionType은 {SMILLING, SAD, SURPRISED, EXPRESSIONLESS, ANGRY, FROWN, SCARED} 중 하나를 넣어주세요.""")
     @GetMapping("/archive")
     public ArchiveAdvertisementListResponse getArchiveList(
             @RequestParam(value = "kwdVal", required = false) String kwdVal,
-            @RequestParam(value = "expressionType", required = false) ExpressionType expressionType,
-            @RequestParam(value = "moodVal", required = false) String moodVal
+            @RequestParam(value = "expressionType", required = false) List<ExpressionType> expressionTypeList,
+            @RequestParam(value = "moodType", required = false) List<String> moodTypeList
     ) {
-        ArchiveAdvertisementListResponse archiveAdvertisementListResponse = advertisementApplication.getArchiveList(kwdVal, expressionType, moodVal);
+        ArchiveAdvertisementListResponse archiveAdvertisementListResponse = advertisementApplication.getArchiveList(kwdVal, expressionTypeList, moodTypeList);
         return archiveAdvertisementListResponse;
     }
 

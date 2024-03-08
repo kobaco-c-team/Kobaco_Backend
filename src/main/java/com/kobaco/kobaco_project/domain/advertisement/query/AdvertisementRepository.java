@@ -14,6 +14,6 @@ public interface AdvertisementRepository {
     void save(Advertisement advertisement);
     List<Advertisement> findAllBySort(String kwdVal, LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList);
     List<Advertisement> findAllByRelation(String kwdVal, LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList);
-    List<Advertisement> findAllByArchiveWithExpression(String kwdVal, ExpressionType expressionType, String moodVal);
-    List<Advertisement> findAllByArchive(String kwdVal, String moodVal);
+    List<Advertisement> findAllByArchiveWithExpression(String kwdVal, List<ExpressionType> expressionTypeList, List<String> moodTypeList);
+    List<Advertisement> findAllByArchive(String kwdVal, List<String> moodTypeList);
 }
