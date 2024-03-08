@@ -121,8 +121,8 @@ public class AdvertisementApplication {
     }
 
     @Transactional(readOnly = true)
-    public AdvertisementListResponse getAdvertisementList(String sortType, String kwdVal, LocalDate startDate, LocalDate endDate) {
-        List<Advertisement> advertisementList = readAdvertisement.getAdvertisementList(sortType, kwdVal, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+    public AdvertisementListResponse getAdvertisementList(String sortType, String kwdVal, LocalDate startDate, LocalDate endDate, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        List<Advertisement> advertisementList = readAdvertisement.getAdvertisementList(sortType, kwdVal, startDate.atStartOfDay(), endDate.atTime(23, 59, 59), expressionTypeList, moodTypeList);
         List<Long> advertisementIdList = advertisementList.stream().map(Advertisement::getId).toList();
         Map<Long, Long> advertisementMap = calculateAdvertisementTime.calculateAdvertisementTimeByIds(advertisementIdList);
         return AdvertisementListResponse.of(
