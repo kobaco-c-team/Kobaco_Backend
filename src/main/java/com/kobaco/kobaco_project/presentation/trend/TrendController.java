@@ -1,6 +1,7 @@
 package com.kobaco.kobaco_project.presentation.trend;
 
 import com.kobaco.kobaco_project.application.trend.TrendApplication;
+import com.kobaco.kobaco_project.application.trend.dto.ContentArchivingListResponse;
 import com.kobaco.kobaco_project.application.trend.dto.TrendAnalysisResponse;
 import com.kobaco.kobaco_project.application.trend.dto.response.TimeStatisticResponse;
 import com.kobaco.kobaco_project.application.trend.dto.response.PersonStatisticResponse;
@@ -20,16 +21,16 @@ public class TrendController {
     private final TrendApplication trendApplication;
 
     @Operation(summary = "SNS 트렌드 검색 api 입니다.\n"
-            + "kwdVal은 검색어, snsType은 sns 유형입니다. "
-            + "kwdVal이 없으면 빈 문자열을 넣어주세요. "
+            + "trendKwd은 검색어, snsType은 sns 유형입니다. "
+            + "trendKwd이 없으면 빈 문자열을 넣어주세요. "
             + "snsType은 {INSTAGRAM, YOUTUBE} 중 하나를 넣어주세요."
     )
     @GetMapping("")
     public TrendAnalysisResponse getTrendAnalysis(
-            @RequestParam(value = "kwdVal") String kwdVal,
+            @RequestParam(value = "trendKwd") String trendKwd,
             @RequestParam(value = "snsType") String snsType
     ){
-        return trendApplication.getTrendAnalysis(kwdVal, snsType);
+        return trendApplication.getTrendAnalysis(trendKwd, snsType);
     }
 
 
@@ -43,5 +44,13 @@ public class TrendController {
     @GetMapping("/time")
     public TimeStatisticResponse getTimeStatistic(@RequestParam String trendKwd) {
         return trendApplication.getTimeStatistic(trendKwd);
+    }
+
+    @Operation(summary = "네이버 콘텐츠 아카이브 조회"
+        + "order는 {RECENT, RELEVANT} 중 하나를 넣어주세요"
+    )
+    @GetMapping("/archiving")
+    public ContentArchivingListResponse getContentArchiving(@RequestParam String trendKwd, @RequestParam String order){
+        return trendApplication.getContentArchiving(trendKwd,order);
     }
 }

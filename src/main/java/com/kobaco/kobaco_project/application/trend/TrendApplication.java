@@ -1,9 +1,8 @@
 package com.kobaco.kobaco_project.application.trend;
 
-import com.kobaco.kobaco_project.application.trend.dto.ContentInfoResponse;
-import com.kobaco.kobaco_project.application.trend.dto.TagInfoResponse;
-import com.kobaco.kobaco_project.application.trend.dto.TrendAnalysisResponse;
+import com.kobaco.kobaco_project.application.trend.dto.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
+import com.kobaco.kobaco_project.domain.trend.service.ReadContentArchiving;
 import com.kobaco.kobaco_project.domain.trend.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +32,7 @@ public class TrendApplication {
     private final ReadAgeTrend readAgeTrend;
     private final ReadGenderTrend readGenderTrend;
     private final CalculateSearchVolume caculateSearchVolume;
+    private final ReadContentArchiving readContentArchiving;
     @Transactional(readOnly = true)
     public TrendAnalysisResponse getTrendAnalysis(String kwdVal, String snsType) {
 
@@ -94,6 +94,15 @@ public class TrendApplication {
                 dayOfWeekStatisticMap.entrySet().stream()
                         .map(e -> DayOfWeekStatisticResponse.of(e.getKey(), e.getValue()))
                         .collect(Collectors.toList())
+        );
+    }
+
+    public ContentArchivingListResponse getContentArchiving(String trendKwd, String order) {
+        return ContentArchivingListResponse.of(
+                readContentArchiving.readContentArchiving(trendKwd,order)
+                .stream()
+                .map(ContentArchivingResponse::from)
+                .toList()
         );
     }
 }
