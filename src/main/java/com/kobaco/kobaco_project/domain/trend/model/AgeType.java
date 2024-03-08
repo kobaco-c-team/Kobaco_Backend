@@ -8,4 +8,8 @@ public enum AgeType {
     AgeType(String description){
         this.description = description;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }
