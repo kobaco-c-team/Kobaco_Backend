@@ -11,6 +11,7 @@ import com.kobaco.kobaco_project.application.advertisement.dto.response.ArchiveA
 import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
 import io.swagger.v3.oas.annotations.Operation;
 import java.time.LocalDate;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,31 +69,37 @@ public class AdvertisementController {
         return advertisementApplication.getAiAnalysis(advertisementId, category);
     }
 
-    @Operation(summary = "광고 리스트 조회 & 검색 sortType \n"
-            + "최신순은 LATEST, 관련도순은 RELATION, kwdVal은 검색어, startDate는 시작일, endDate는 종료일, "
-            + "kwdVal이 없으면 빈 문자열을 넣어주세요, startDate와 endDate는 yyyy-MM-dd 형식으로 넣어주세요.\n"
-            + "기본 정렬이 최신순이라 default는 LATEST로 설정해주세요.")
+    @Operation(summary = """
+            광고 리스트 조회 & 검색 sortType 
+            최신순은 LATEST, 관련도순은 RELATION, kwdVal은 검색어, startDate는 시작일, endDate는 종료일,
+            kwdVal이 없으면 빈 문자열을 넣어주세요, startDate와 endDate는 yyyy-MM-dd 형식으로 넣어주세요.
+            기본 정렬이 최신순이라 default는 LATEST로 설정해주세요.
+            expressionType은 {SMILLING, SAD, SURPRISED, EXPRESSIONLESS, ANGRY, FROWN, SCARED} 중 하나를 넣어주세요.
+            """)
     @GetMapping("/list")
     public AdvertisementListResponse getAdvertisementList(
             @RequestParam(value = "sortType") String sortType,
             @RequestParam(value = "kwdVal", required = false) String kwdVal,
             @RequestParam(value = "startDate") LocalDate startDate,
-            @RequestParam(value = "endDate") LocalDate endDate
+            @RequestParam(value = "endDate") LocalDate endDate,
+            @RequestParam(value = "expressionType", required = false) List<ExpressionType> expressionTypeList,
+            @RequestParam(value = "moodType", required = false) List<String> moodTypeList
     ) {
-        AdvertisementListResponse advertisementListResponse = advertisementApplication.getAdvertisementList(sortType, kwdVal, startDate, endDate);
+        AdvertisementListResponse advertisementListResponse = advertisementApplication.getAdvertisementList(sortType, kwdVal, startDate, endDate, expressionTypeList, moodTypeList);
         return advertisementListResponse;
     }
 
-    @Operation(summary = "광고 스크랩 리스트 조회 \n"
-            + "kwdVal은 검색어, expressionType은 표정, moodVal은 분위기, kwdVal이 없으면 빈 문자열을 넣어주세요, expressionType이 없으면 null을 넣어주세요, moodVal이 없으면 빈 문자열을 넣어주세요."
-            + "expressionType은 {SMILLING, SAD, SURPRISED, EXPRESSIONLESS, ANGRY, FROWN, SCARED} 중 하나를 넣어주세요.")
+    @Operation(summary = """
+            광고 스크랩 리스트 조회 
+            kwdVal은 검색어, expressionType은 표정, moodVal은 분위기, kwdVal이 없으면 빈 문자열을 넣어주세요, expressionType이 없으면 null을 넣어주세요, moodType이 없으면 빈 문자열을 넣어주세요
+            expressionType은 {SMILLING, SAD, SURPRISED, EXPRESSIONLESS, ANGRY, FROWN, SCARED} 중 하나를 넣어주세요.""")
     @GetMapping("/archive")
     public ArchiveAdvertisementListResponse getArchiveList(
             @RequestParam(value = "kwdVal", required = false) String kwdVal,
-            @RequestParam(value = "expressionType", required = false) ExpressionType expressionType,
-            @RequestParam(value = "moodVal", required = false) String moodVal
+            @RequestParam(value = "expressionType", required = false) List<ExpressionType> expressionTypeList,
+            @RequestParam(value = "moodType", required = false) List<String> moodTypeList
     ) {
-        ArchiveAdvertisementListResponse archiveAdvertisementListResponse = advertisementApplication.getArchiveList(kwdVal, expressionType, moodVal);
+        ArchiveAdvertisementListResponse archiveAdvertisementListResponse = advertisementApplication.getArchiveList(kwdVal, expressionTypeList, moodTypeList);
         return archiveAdvertisementListResponse;
     }
 

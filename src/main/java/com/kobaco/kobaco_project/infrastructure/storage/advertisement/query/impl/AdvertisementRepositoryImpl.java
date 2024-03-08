@@ -73,32 +73,32 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
     }
 
     @Override
-    public List<Advertisement> findAllBySort(String kwdVal, LocalDateTime start, LocalDateTime end) {
-        return advertisementEntityRepository.findAllBySort(kwdVal, start, end)
+    public List<Advertisement> findAllBySort(String kwdVal, LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllBySort(kwdVal, start, end, expressionTypeList, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public List<Advertisement> findAllByRelation(String kwdVal, LocalDateTime start, LocalDateTime end) {
-        return advertisementEntityRepository.findAllByRelation(kwdVal, start, end)
+    public List<Advertisement> findAllByRelation(String kwdVal, LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllByRelation(kwdVal, start, end, expressionTypeList, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public List<Advertisement> findAllByArchiveWithExpression(String kwdVal, ExpressionType expressionType, String moodVal) {
-        return advertisementEntityRepository.findAllByArchiveWithExpression(kwdVal, expressionType, moodVal)
+    public List<Advertisement> findAllByArchiveWithExpression(String kwdVal, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllByArchiveWithExpression(kwdVal,expressionTypeList, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public List<Advertisement> findAllByArchive(String kwdVal, String moodVal) {
-        return advertisementEntityRepository.findAllByArchive(kwdVal, moodVal)
+    public List<Advertisement> findAllByArchive(String kwdVal, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllByArchive(kwdVal, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();

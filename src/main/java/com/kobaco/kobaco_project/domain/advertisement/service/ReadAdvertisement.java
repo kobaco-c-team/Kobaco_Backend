@@ -23,20 +23,20 @@ public class ReadAdvertisement {
     }
 
     public List<Advertisement> getAdvertisementList(String sortType, String kwdVal,
-                                                    LocalDateTime start, LocalDateTime end) {
+                                                    LocalDateTime start, LocalDateTime end, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
         if (SORT_BY_DATE.equals(sortType)) {
-            return advertisementRepository.findAllBySort(kwdVal, start, end);
+            return advertisementRepository.findAllBySort(kwdVal, start, end, expressionTypeList, moodTypeList);
         } else if (SORT_BY_RELATION.equals(sortType)) {
-            return advertisementRepository.findAllByRelation(kwdVal, start, end);
+            return advertisementRepository.findAllByRelation(kwdVal, start, end, expressionTypeList, moodTypeList);
         } else {
             throw new IllegalArgumentException("정렬 타입이 올바르지 않습니다.");
         }
     }
 
-    public List<Advertisement> getArchiveList(String kwdVal, ExpressionType expressionType, String moodVal) {
-        return Optional.ofNullable(expressionType)
-                .map(et -> advertisementRepository.findAllByArchiveWithExpression(kwdVal, et, moodVal))
-                .orElse(advertisementRepository.findAllByArchive(kwdVal, moodVal));
+    public List<Advertisement> getArchiveList(String kwdVal, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return Optional.ofNullable(expressionTypeList)
+                .map(et -> advertisementRepository.findAllByArchiveWithExpression(kwdVal, expressionTypeList, moodTypeList))
+                .orElse(advertisementRepository.findAllByArchive(kwdVal, moodTypeList));
     }
 
 }
