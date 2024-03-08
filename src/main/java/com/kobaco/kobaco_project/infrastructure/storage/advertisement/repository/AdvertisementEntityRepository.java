@@ -27,8 +27,8 @@ public interface AdvertisementEntityRepository extends JpaRepository<Advertiseme
 
     @Query("""
     select a from AdvertisementEntity a 
-    left join ItemEntity i on i.advertisementEntity.id = a.id
-    left join PersonEntity p on p.advertisementEntity.id = a.id
+    join ItemEntity i on i.advertisementEntity.id = a.id
+    join PersonEntity p on p.advertisementEntity.id = a.id
     where (:kwdVal is null or (:kwdVal is not null 
            and (a.title like %:kwdVal% 
            or i.name like %:kwdVal% 
@@ -39,10 +39,10 @@ public interface AdvertisementEntityRepository extends JpaRepository<Advertiseme
 
     @Query("""
     select a from AdvertisementEntity a
-    left join ItemEntity i on i.advertisementEntity.id = a.id
-    left join PersonEntity p on p.advertisementEntity.id = a.id
-    left join MoodEntity m on m.advertisementEntity.id = a.id
-    left join ExpressionEntity e on e.advertisementEntity.id = a.id
+    join ItemEntity i on i.advertisementEntity.id = a.id
+    join PersonEntity p on p.advertisementEntity.id = a.id
+    join MoodEntity m on m.advertisementEntity.id = a.id
+    join ExpressionEntity e on e.advertisementEntity.id = a.id
     where(:kwdVal is null or (:kwdVal is not null and (a.title like %:kwdVal% 
            or i.name like %:kwdVal% 
            or p.name like %:kwdVal% ) ))
