@@ -7,6 +7,7 @@ import com.kobaco.kobaco_project.domain.advertisement.query.AdvertisementReposit
 import com.kobaco.kobaco_project.domain.advertisement.query.MoodRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ReadAdvertisementSimilar {
                 .forEach(advertisement -> advertisementSimilarList.add(AdvertisementSimilar.of(
                         advertisement.getVideoUrl(),
                         advertisement.getTitle(),
-                        advertisement.getAgency(),
+                        LocalDate.from(advertisement.getCreatedAt()),
                         moodRepository.findAllByAdvertisementId(advertisement.getId()),
                         advertisement.getIsArchived()
                 )));
