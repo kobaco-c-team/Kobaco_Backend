@@ -89,16 +89,16 @@ public class AdvertisementRepositoryImpl implements AdvertisementRepository {
     }
 
     @Override
-    public List<Advertisement> findAllByArchiveWithExpression(String kwdVal, ExpressionType expressionType, String moodVal) {
-        return advertisementEntityRepository.findAllByArchiveWithExpression(kwdVal, expressionType, moodVal)
+    public List<Advertisement> findAllByArchiveWithExpression(String kwdVal, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllByArchiveWithExpression(kwdVal,expressionTypeList, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public List<Advertisement> findAllByArchive(String kwdVal, String moodVal) {
-        return advertisementEntityRepository.findAllByArchive(kwdVal, moodVal)
+    public List<Advertisement> findAllByArchive(String kwdVal, List<String> moodTypeList) {
+        return advertisementEntityRepository.findAllByArchive(kwdVal, moodTypeList)
                 .stream()
                 .map(advertisementMapper::toDomain)
                 .toList();

@@ -33,10 +33,10 @@ public class ReadAdvertisement {
         }
     }
 
-    public List<Advertisement> getArchiveList(String kwdVal, ExpressionType expressionType, String moodVal) {
-        return Optional.ofNullable(expressionType)
-                .map(et -> advertisementRepository.findAllByArchiveWithExpression(kwdVal, et, moodVal))
-                .orElse(advertisementRepository.findAllByArchive(kwdVal, moodVal));
+    public List<Advertisement> getArchiveList(String kwdVal, List<ExpressionType> expressionTypeList, List<String> moodTypeList) {
+        return Optional.ofNullable(expressionTypeList)
+                .map(et -> advertisementRepository.findAllByArchiveWithExpression(kwdVal, expressionTypeList, moodTypeList))
+                .orElse(advertisementRepository.findAllByArchive(kwdVal, moodTypeList));
     }
 
 }
