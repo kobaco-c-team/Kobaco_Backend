@@ -17,7 +17,7 @@ public class TagRepositoryImpl implements TagRepository {
     private final TagMapper tagMapper;
     @Override
     public List<Tag> findAllByKeywordNameAndPlatform(String kwdVal, String platform) {
-        return tagEntityRepository.findAllByKeywordEntityNameAndPlatform(kwdVal, platform)
+        return tagEntityRepository.findAllByTrendEntityTrendKeywordAndPlatform(kwdVal, platform)
                 .stream()
                 .map(tagMapper::toDomain)
                 .toList();

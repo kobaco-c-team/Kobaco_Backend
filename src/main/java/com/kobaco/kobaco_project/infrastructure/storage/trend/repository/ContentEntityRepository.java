@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ContentEntityRepository extends JpaRepository<ContentEntity, Long> {
-    List<ContentEntity> findByKeywordEntityNameAndPlatform(String kwdVal, String platform);
+    List<ContentEntity> findByTrendEntityTrendKeywordAndPlatform(String kwdVal, String platform);
 }

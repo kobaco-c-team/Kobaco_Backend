@@ -22,6 +22,6 @@ public class ContentEntity {
     private String platform;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "keyword_id")
-    private KeywordEntity keywordEntity;
+    @JoinColumn(name = "trend_id")
+    private TrendEntity trendEntity;
 }

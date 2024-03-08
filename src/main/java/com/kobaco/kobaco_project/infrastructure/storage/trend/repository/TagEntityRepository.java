@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface TagEntityRepository extends JpaRepository<TagEntity, Long> {
-    List<TagEntity> findAllByKeywordEntityNameAndPlatform(String kwdVal, String platform);
+    List<TagEntity> findAllByTrendEntityTrendKeywordAndPlatform(String kwdVal, String platform);
 
     List<TagEntity> findAllByContentEntityIdAndPlatform(Long id, String platform);
 }

@@ -28,6 +28,6 @@ public class ContentArchivingEntity {
     private PostType postType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "keyword_id")
-    private KeywordEntity keywordEntity;
+    @JoinColumn(name = "trend_id")
+    private TrendEntity trendEntity;
 }

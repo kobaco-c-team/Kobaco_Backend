@@ -19,7 +19,7 @@ public class ContentArchivingRepositoryImpl implements ContentArchivingRepositor
     private final ContentArchivingMapper contentArchivingMapper;
     @Override
     public List<ContentArchiving> findAllByKeyword(String trendKwd, String order) {
-        List<ContentArchivingEntity> contentArchivingEntityList = contentArchivingEntityRepository.findAllByKeywordEntityName(trendKwd);
+        List<ContentArchivingEntity> contentArchivingEntityList = contentArchivingEntityRepository.findAllByTrendEntityTrendKeyword(trendKwd);
 
         if(order.equals(OrderType.RECENT.getDescription())){
             return contentArchivingEntityList.stream()

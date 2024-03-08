@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ContentArchivingEntityRepository extends JpaRepository<ContentArchivingEntity, Long> {
-    List<ContentArchivingEntity> findAllByKeywordEntityName(String kwyName);
+    List<ContentArchivingEntity> findAllByTrendEntityTrendKeyword(String kwyName);
 }
