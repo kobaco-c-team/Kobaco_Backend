@@ -2,9 +2,7 @@ package com.kobaco.kobaco_project.application.advertisement;
 
 import com.kobaco.kobaco_project.application.advertisement.dto.response.*;
 import com.kobaco.kobaco_project.common.annotation.ApplicationService;
-import com.kobaco.kobaco_project.domain.advertisement.model.Advertisement;
-import com.kobaco.kobaco_project.domain.advertisement.model.ExpressionType;
-import com.kobaco.kobaco_project.domain.advertisement.model.Mood;
+import com.kobaco.kobaco_project.domain.advertisement.model.*;
 import com.kobaco.kobaco_project.domain.advertisement.service.*;
 import com.kobaco.kobaco_project.domain.advertisement.service.ArchiveAdvertisement;
 import com.kobaco.kobaco_project.domain.advertisement.service.ReadAdvertisement;
@@ -60,15 +58,15 @@ public class AdvertisementApplication {
         return AdvertisementAnalysisResponse.of(
                 readMood.getMood(advertisementId)
                         .stream()
-                        .map(mood -> MoodInfoResponse.of(mood.getType()))
+                        .map(Mood::getType)
                         .toList(),
                 readItem.getItem(advertisementId)
                         .stream()
-                        .map(item -> ItemInfoResponse.of(item.getName()))
+                        .map(Item::getName)
                         .toList(),
                 readPerson.getPerson(advertisementId)
                         .stream()
-                        .map(person -> PersonInfoResponse.of(person.getName()))
+                        .map(Person::getName)
                         .toList()
         );
     }
