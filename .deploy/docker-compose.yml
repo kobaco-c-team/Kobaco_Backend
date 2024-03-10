@@ -14,3 +14,8 @@ services:
       - DB_URL=${DATASOURCE_URL_LOCAL}
       - DB_USERNAME=${DATASOURCE_USERNAME}
       - DB_PASSWORD=${DATASOURCE_PASSWORD}
+
+networks:
+  backend_network:
+    driver: bridge
+    external: true
